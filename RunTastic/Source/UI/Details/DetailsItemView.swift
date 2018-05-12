@@ -27,7 +27,11 @@ class DetailsItemView: UIView {
         
         // Setup content stack view.
         let contentStackView = UIStackView()
+        contentStackView.axis = .vertical
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Setup labels.
+        titleLabel.font = UIFont.boldSystemFont(ofSize: titleLabel.font.pointSize)
         
         // Add subviews.
         contentStackView.addArrangedSubview(titleLabel)
@@ -44,7 +48,7 @@ class DetailsItemView: UIView {
             contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             // Constrain labels.
-            valueLabel.widthAnchor.constraint(equalTo: titleLabel.widthAnchor),
+            valueLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor),
         ])
     }
     

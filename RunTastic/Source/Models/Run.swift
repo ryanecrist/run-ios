@@ -12,11 +12,28 @@ struct Run: Decodable {
     
     let id: Int
     
-    let startTime: Double?
+    let startTimeMs: Int?
     
-    let endTime: Double?
+    var startTime: Date? {
+        guard let startTimeMs = startTimeMs else { return nil }
+        return Date(millisecondsSinceEpoch: startTimeMs)
+    }
+    
+    let endTimeMs: Int?
+    
+    var endTime: Date? {
+        guard let endTimeMs = endTimeMs else { return nil }
+        return Date(millisecondsSinceEpoch: endTimeMs)
+    }
     
     let distance: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case startTimeMs = "startTime"
+        case endTimeMs = "endTime"
+        case distance = "distance"
+    }
     
     struct Create {
         struct Request: Encodable {

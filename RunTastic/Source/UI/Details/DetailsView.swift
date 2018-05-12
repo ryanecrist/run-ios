@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import MapKit
 import UIKit
 
 class DetailsView: UIView {
@@ -23,6 +24,12 @@ class DetailsView: UIView {
     var distanceLabel: UILabel {
         return distanceItemView.valueLabel
     }
+    
+    let mapView = MKMapView()
+    
+    let startButton = UIButton()
+    
+    let stopButton = UIButton()
     
     // MARK: - Private Properties
     
@@ -45,10 +52,18 @@ class DetailsView: UIView {
         backgroundColor = .white
         
         // Setup content stack view.
-        let contentStackView = UIStackView()
+        let contentStackView = UIStackView(arrangedSubviews: [startTimeItemView,
+                                                              endTimeItemView,
+                                                              distanceItemView,
+                                                              mapView,
+                                                              startButton,
+                                                              stopButton])
         contentStackView.axis = .vertical
-        contentStackView.distribution = .fillEqually
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        contentStackView.spacing = 8
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.setCustomSpacing(0, after: mapView)
         
         // Setup start time item view.
         startTimeItemView.titleLabel.text = "Start Time:"
@@ -59,10 +74,17 @@ class DetailsView: UIView {
         // Setup distance item view.
         distanceItemView.titleLabel.text = "Distance:"
         
+        // Setup start button.
+        startButton.backgroundColor = #colorLiteral(red: 0.1803921569, green: 0.8, blue: 0.4431372549, alpha: 1)
+        startButton.isHidden = true
+        startButton.setTitle("START", for: .normal)
+        
+        // Setup stop button.
+        stopButton.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.2980392157, blue: 0.2352941176, alpha: 1)
+        stopButton.isHidden = true
+        stopButton.setTitle("STOP", for: .normal)
+        
         // Add subviews.
-        contentStackView.addArrangedSubview(startTimeItemView)
-        contentStackView.addArrangedSubview(endTimeItemView)
-        contentStackView.addArrangedSubview(distanceItemView)
         addSubview(contentStackView)
         
         // Add constraints.
@@ -73,6 +95,10 @@ class DetailsView: UIView {
             contentStackView.topAnchor.constraint(equalTo: topAnchor),
             contentStackView.rightAnchor.constraint(equalTo: rightAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        
+            // Constrain buttons.
+            startButton.heightAnchor.constraint(equalToConstant: 50),
+            stopButton.heightAnchor.constraint(equalTo: startButton.heightAnchor),
         ])
     }
     

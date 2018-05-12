@@ -79,10 +79,3 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 }
 
-extension Date {
-    
-    static var millisecondsSinceEpoch: Double {
-        return Date().timeIntervalSince1970 * 1000
-    }
-}
-
