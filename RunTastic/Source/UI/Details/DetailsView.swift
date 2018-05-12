@@ -29,7 +29,7 @@ class DetailsView: UIView {
     
     let startButton = UIButton()
     
-    let stopButton = UIButton()
+    let finishButton = UIButton()
     
     // MARK: - Private Properties
     
@@ -57,7 +57,7 @@ class DetailsView: UIView {
                                                               distanceItemView,
                                                               mapView,
                                                               startButton,
-                                                              stopButton])
+                                                              finishButton])
         contentStackView.axis = .vertical
         contentStackView.isLayoutMarginsRelativeArrangement = true
         contentStackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
@@ -79,10 +79,10 @@ class DetailsView: UIView {
         startButton.isHidden = true
         startButton.setTitle("START", for: .normal)
         
-        // Setup stop button.
-        stopButton.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.2980392157, blue: 0.2352941176, alpha: 1)
-        stopButton.isHidden = true
-        stopButton.setTitle("STOP", for: .normal)
+        // Setup finish button.
+        finishButton.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.2980392157, blue: 0.2352941176, alpha: 1)
+        finishButton.isHidden = true
+        finishButton.setTitle("FINISH", for: .normal)
         
         // Add subviews.
         addSubview(contentStackView)
@@ -98,7 +98,7 @@ class DetailsView: UIView {
         
             // Constrain buttons.
             startButton.heightAnchor.constraint(equalToConstant: 50),
-            stopButton.heightAnchor.constraint(equalTo: startButton.heightAnchor),
+            finishButton.heightAnchor.constraint(equalTo: startButton.heightAnchor),
         ])
     }
     

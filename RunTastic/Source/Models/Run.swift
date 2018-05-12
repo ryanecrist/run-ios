@@ -45,17 +45,13 @@ struct Run: Decodable {
     
     struct Start {
         struct Request: Encodable {
-            let timestamp: Double
-        }
-        struct Response: Decodable {
-            let id: Int
+            let timestamp: Int
         }
     }
     
     struct Finish {
         struct Request: Encodable {
-            let id: Int
-            let timestamp: Double
+            let timestamp: Int
         }
     }
 }

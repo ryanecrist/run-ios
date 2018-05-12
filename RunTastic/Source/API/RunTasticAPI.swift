@@ -18,10 +18,7 @@ class RunTasticAPI {
     
     static func createRun() -> HTTPRequest {
         return client.request(method: .post,
-                              path: "runs/create",
-                              headers: ["Content-Type": "application/json"],
-                              with: HTTPRequestEncoders.json,
-                              data: Run.Create.Request())
+                              path: "runs/create")
     }
     
     static func getRuns() -> HTTPRequest {
@@ -30,5 +27,21 @@ class RunTasticAPI {
     
     static func getRun(with id: Int) -> HTTPRequest {
         return client.request(path: "runs/\(id)")
+    }
+    
+    static func startRun(with id: Int, startTime: Int) -> HTTPRequest {
+        return client.request(method: .post,
+                              path: "runs/\(id)/start",
+                              headers: ["Content-Type": "application/json"],
+                              with: HTTPRequestEncoders.json,
+                              data: Run.Start.Request(timestamp: startTime))
+    }
+    
+    static func finishRun(with id: Int, endTime: Int) -> HTTPRequest {
+        return client.request(method: .post,
+                              path: "runs/\(id)/finish",
+                              headers: ["Content-Type": "application/json"],
+                              with: HTTPRequestEncoders.json,
+                              data: Run.Finish.Request(timestamp: endTime))
     }
 }

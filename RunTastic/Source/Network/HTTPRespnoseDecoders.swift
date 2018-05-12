@@ -10,6 +10,8 @@ import Foundation
 
 typealias HTTPResponseDecoder<T> = (_ data: Data) throws -> T
 
+typealias HTTPEmptyResponse = HTTPResponse<Data?>
+
 struct HTTPResponseDecoders {
     
     static var jsonDecoder = JSONDecoder()
@@ -44,7 +46,15 @@ extension HTTPRequest {
         client?.start(self, with: HTTPResponseDecoders.data, completionHandler: completionHandler)
     }
     
+    func start(completionHandler: ((HTTPResponse<Data?>) -> Void)? = nil) {
+        client?.start(self, with: HTTPResponseDecoders.data, completionHandler: completionHandler)
+    }
+    
     func start(completionHandler: ((HTTPResponse<String>) -> Void)? = nil) {
+        client?.start(self, with: HTTPResponseDecoders.string, completionHandler: completionHandler)
+    }
+    
+    func start(completionHandler: ((HTTPResponse<String?>) -> Void)? = nil) {
         client?.start(self, with: HTTPResponseDecoders.string, completionHandler: completionHandler)
     }
     

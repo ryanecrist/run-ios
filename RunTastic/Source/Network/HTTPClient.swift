@@ -22,6 +22,8 @@ enum HTTPMethod: String {
 
 enum HTTPClientError: Error {
     case invalidRequest
+    case emptyResponse
+    case nonHTTPResponse
     case invalidResponse
     case clientError
     case serverError
@@ -147,27 +149,57 @@ class HTTPClient {
             
             guard let urlResponse = response as? HTTPURLResponse else {
                 DispatchQueue.main.async {
-                    completionHandler?(HTTPResponse<T>(result: HTTPResult.failure(error: HTTPClientError.invalidResponse)))
+                    completionHandler?(HTTPResponse<T>(result: HTTPResult.failure(error: HTTPClientError.nonHTTPResponse)))
                 }
                 return
             }
             
-            print("DATA: \(data)")
-            print("RESPONSE: \(response)")
-            print("ERROR: \(error)")
-            
-            if let data = data,
-                let value = try? responseDecoder(data) {
+            if 400 ... 499 ~= urlResponse.statusCode {
+                DispatchQueue.main.async {
+                    completionHandler?(HTTPResponse<T>(result: HTTPResult.failure(error: HTTPClientError.clientError)))
+                }
+            } else if 500 ... 599 ~= urlResponse.statusCode {
+                DispatchQueue.main.async {
+                    completionHandler?(HTTPResponse<T>(result: HTTPResult.failure(error: HTTPClientError.serverError)))
+                }
+            } else {
+                let result = self.decodedResult(data: data, decoder: responseDecoder)
                 
                 DispatchQueue.main.async {
-                    completionHandler?(HTTPResponse<T>(result: HTTPResult.success(value: value), urlResponse: urlResponse))
+                    completionHandler?(HTTPResponse<T>(result: result,
+                                                       urlResponse: urlResponse))
                 }
-                
-            } else {
-                // TODO handle empty response!
             }
         }
         
         dataTask.resume()
+    }
+    
+    func decodedResult<T>(data: Data?,
+                          decoder: HTTPResponseDecoder<T>) -> HTTPResult<T> {
+
+        if let data = data {
+            do {
+                return .success(value: try decoder(data))
+            } catch {
+                return .failure(error: error)
+            }
+        } else {
+            return .failure(error: HTTPClientError.emptyResponse)
+        }
+    }
+    
+    func decodedResult<T: ExpressibleByNilLiteral>(data: Data?,
+                                                   decoder: HTTPResponseDecoder<T>) -> HTTPResult<T> {
+
+        if let data = data {
+            do {
+                return .success(value: try decoder(data))
+            } catch {
+                return .failure(error: error)
+            }
+        } else {
+            return .success(value: nil)
+        }
     }
 }

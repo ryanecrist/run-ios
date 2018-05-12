@@ -10,8 +10,8 @@ import Foundation
 
 extension Date {
     
-    static var millisecondsSinceEpoch: Double {
-        return Date().timeIntervalSince1970 * 1000
+    static var millisecondsSinceEpoch: Int {
+        return Int(Date().timeIntervalSince1970 * 1000)
     }
     
     init(millisecondsSinceEpoch: Int) {

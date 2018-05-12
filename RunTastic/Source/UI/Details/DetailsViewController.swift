@@ -33,6 +33,10 @@ class DetailsViewController: UIViewController {
         // Set title.
         title = "Run \(runId)"
         
+        // Setup buttons.
+        detailsView.startButton.addTarget(self, action: #selector(startRun), for: .touchUpInside)
+        detailsView.finishButton.addTarget(self, action: #selector(finishRun), for: .touchUpInside)
+        
         // Get run.
         RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run>) in
             
@@ -43,6 +47,7 @@ class DetailsViewController: UIViewController {
                     self.detailsView.startTimeLabel.text = "\(startTime)"
                 } else {
                     self.detailsView.startTimeLabel.text = "N/A"
+                    self.detailsView.startButton.isHidden = false
                 }
                 
                 // Get run end time.
@@ -50,6 +55,7 @@ class DetailsViewController: UIViewController {
                     self.detailsView.endTimeLabel.text = "\(endTime)"
                 } else {
                     self.detailsView.endTimeLabel.text = "N/A"
+                    self.detailsView.finishButton.isHidden = !self.detailsView.startButton.isHidden
                 }
                 
                 // Get run distance.
@@ -58,7 +64,39 @@ class DetailsViewController: UIViewController {
                 } else {
                     self.detailsView.distanceLabel.text = "N/A"
                 }
+                
+            } else {
+                // TODO run not found!
             }
         }
+    }
+    
+    @objc
+    func startRun(_ sender: UIButton) {
+        
+        // Update buttons.
+        detailsView.startButton.isHidden = true
+        detailsView.finishButton.isHidden = false
+        
+        // Start run.
+        RunTasticAPI.startRun(with: runId,
+                              startTime: Date.millisecondsSinceEpoch)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN STARTED!: \(response.result)")
+            }
+    }
+    
+    @objc
+    func finishRun(_ sender: UIButton) {
+        
+        // Update buttons.
+        detailsView.finishButton.isHidden = true
+        
+        // Finish run.
+        RunTasticAPI.finishRun(with: runId,
+                               endTime: Date.millisecondsSinceEpoch)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN FINISHED!: \(response.result)")
+            }
     }
 }
