@@ -44,7 +44,7 @@ class ListViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        RunTasticAPI.listRuns().start() { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run]>) in
                 
             if let runs = response.value {
                 self.runs = runs
@@ -70,7 +70,7 @@ class ListViewController: UITableViewController {
     @objc
     func refreshList(_ sender: UIRefreshControl) {
         
-        RunTasticAPI.listRuns().start() { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run]>) in
                 
             if let runs = response.value {
                 self.runs = runs

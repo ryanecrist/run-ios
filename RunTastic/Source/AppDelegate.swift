@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Setup HTTP client.
-        let configuration = HTTPClientConfiguration(baseEndpoint: "https://buchta-raceapi.herokuapp.com")
-        HTTPClient.configure(with: configuration)
+        // Setup global navigation bar appearance.
+        UINavigationBar.appearance().isTranslucent = false
         
         // Setup location manager.
         LocationManager.shared.requestAlwaysAuthorization()

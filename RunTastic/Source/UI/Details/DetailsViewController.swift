@@ -30,6 +30,35 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set title.
         title = "Run \(runId)"
+        
+        // Get run.
+        RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run>) in
+            
+            if let run = response.value {
+            
+                // Get run start time.
+                if let startTime = run.startTime {
+                    self.detailsView.startTimeLabel.text = "\(startTime)"
+                } else {
+                    self.detailsView.startTimeLabel.text = "N/A"
+                }
+                
+                // Get run end time.
+                if let endTime = run.endTime {
+                    self.detailsView.endTimeLabel.text = "\(endTime)"
+                } else {
+                    self.detailsView.endTimeLabel.text = "N/A"
+                }
+                
+                // Get run distance.
+                if let distance = run.distance {
+                    self.detailsView.distanceLabel.text = "\(distance)"
+                } else {
+                    self.detailsView.distanceLabel.text = "N/A"
+                }
+            }
+        }
     }
 }

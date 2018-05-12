@@ -10,17 +10,25 @@ import Foundation
 
 class RunTasticAPI {
     
-    static let client = HTTPClient.client(named: "RunTastic")
+    static let client: HTTPClient = {
+        // Setup HTTP client.
+        let configuration = HTTPClientConfiguration(baseEndpoint: "https://buchta-raceapi.herokuapp.com")
+        return HTTPClient.configure(name: "RunTastic", with: configuration)
+    }()
     
     static func createRun() -> HTTPRequest {
-        return HTTPClient.client().request(method: .post,
-                                           path: "runs/create",
-                                           headers: ["Content-Type": "application/json"],
-                                           with: HTTPRequestEncoders.json,
-                                           data: Run.Create.Request())
+        return client.request(method: .post,
+                              path: "runs/create",
+                              headers: ["Content-Type": "application/json"],
+                              with: HTTPRequestEncoders.json,
+                              data: Run.Create.Request())
     }
     
-    static func listRuns() -> HTTPRequest {
-        return HTTPClient.client().request(path: "runs")
+    static func getRuns() -> HTTPRequest {
+        return client.request(path: "runs")
+    }
+    
+    static func getRun(with id: Int) -> HTTPRequest {
+        return client.request(path: "runs/\(id)")
     }
 }
