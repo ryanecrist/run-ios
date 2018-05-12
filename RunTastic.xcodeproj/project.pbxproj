@@ -27,6 +27,7 @@
 		94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82920A71DE000D175C8 /* DetailsView.swift */; };
 		94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */; };
 		94A9D82F20A74F2600D175C8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82E20A74F2600D175C8 /* DateExtension.swift */; };
+		94A9D83120A78DB600D175C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83020A78DB600D175C8 /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		94A9D82920A71DE000D175C8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsItemView.swift; sourceTree = "<group>"; };
 		94A9D82E20A74F2600D175C8 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		94A9D83020A78DB600D175C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		94A9D82020A70DEF00D175C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				94A9D83020A78DB600D175C8 /* Location.swift */,
 				94A9D82120A70DFE00D175C8 /* Run.swift */,
 			);
 			path = Models;
@@ -289,6 +292,7 @@
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */,
 				94A9D82F20A74F2600D175C8 /* DateExtension.swift in Sources */,
+				94A9D83120A78DB600D175C8 /* Location.swift in Sources */,
 				94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */,
 				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
 				94A9D81F20A70DD200D175C8 /* LocationManager.swift in Sources */,

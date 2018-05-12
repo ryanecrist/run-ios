@@ -44,4 +44,8 @@ class RunTasticAPI {
                               with: HTTPRequestEncoders.json,
                               data: Run.Finish.Request(timestamp: endTime))
     }
+    
+    static func getRunRoute(with id: Int) -> HTTPRequest {
+        return client.request(path: "runs/\(id)/route")
+    }
 }

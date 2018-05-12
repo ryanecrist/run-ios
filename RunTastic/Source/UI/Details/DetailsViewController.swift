@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import MapKit
 import UIKit
 
 class DetailsViewController: UIViewController {
@@ -32,6 +33,9 @@ class DetailsViewController: UIViewController {
         
         // Set title.
         title = "Run \(runId)"
+        
+        // Setup map view.
+        detailsView.mapView.delegate = self
         
         // Setup buttons.
         detailsView.startButton.addTarget(self, action: #selector(startRun), for: .touchUpInside)
@@ -69,6 +73,22 @@ class DetailsViewController: UIViewController {
                 // TODO run not found!
             }
         }
+        
+        // Get route.
+        RunTasticAPI.getRunRoute(with: runId).start() { (response: HTTPResponse<[Location]>) in
+            
+            if let locations = response.value, !locations.isEmpty {
+                
+                // Get coordinates and create route line.
+                let coordinates = locations.map({ $0.coordinate })
+                let routeLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+                
+                // Set the visible region of the
+                self.detailsView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
+                                                           edgePadding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8), animated: false)
+                self.detailsView.mapView.add(routeLine)
+            }
+        }
     }
     
     @objc
@@ -98,5 +118,18 @@ class DetailsViewController: UIViewController {
             .start() { (response: HTTPEmptyResponse) in
                 print("RUN FINISHED!: \(response.result)")
             }
+    }
+}
+
+extension DetailsViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        // TODO
+        // Handle multiple overlays.
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.lineWidth = 5
+        renderer.strokeColor = UIColor.black.withAlphaComponent(0.5)
+        return renderer
     }
 }
