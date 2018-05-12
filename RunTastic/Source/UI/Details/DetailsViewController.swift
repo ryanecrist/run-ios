@@ -77,16 +77,32 @@ class DetailsViewController: UIViewController {
         // Get route.
         RunTasticAPI.getRunRoute(with: runId).start() { (response: HTTPResponse<[Location]>) in
             
-            if let locations = response.value, !locations.isEmpty {
+            if let locations = response.value, locations.count >= 2 {
                 
                 // Get coordinates and create route line.
                 let coordinates = locations.map({ $0.coordinate })
                 let routeLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
                 
-                // Set the visible region of the
+                // Set the visible region of the map to contain the route.
                 self.detailsView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
-                                                           edgePadding: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8), animated: false)
+                                                           edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: false)
                 self.detailsView.mapView.add(routeLine)
+                
+                // Add the start point.
+                if let startCoordinate = coordinates.first {
+                    let startAnnotation = MKPointAnnotation()
+                    startAnnotation.coordinate = startCoordinate
+                    startAnnotation.title = "Start"
+                    self.detailsView.mapView.addAnnotation(startAnnotation)
+                }
+                
+                // Add the finish point.
+                if let finishCoordinate = coordinates.last {
+                    let finishAnnotation = MKPointAnnotation()
+                    finishAnnotation.coordinate = finishCoordinate
+                    finishAnnotation.title = "Finish"
+                    self.detailsView.mapView.addAnnotation(finishAnnotation)
+                }
             }
         }
     }
@@ -131,5 +147,22 @@ extension DetailsViewController: MKMapViewDelegate {
         renderer.lineWidth = 5
         renderer.strokeColor = UIColor.black.withAlphaComponent(0.5)
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKMarkerAnnotationView
+        
+        if view == nil {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            
+            if annotation.title == "Start" {
+                view?.markerTintColor = #colorLiteral(red: 0.1803921569, green: 0.8, blue: 0.4431372549, alpha: 1)
+            } else if annotation.title == "Finish" {
+                view?.markerTintColor = #colorLiteral(red: 0.9058823529, green: 0.2980392157, blue: 0.2352941176, alpha: 1)
+            }
+        }
+        
+        return view
     }
 }
