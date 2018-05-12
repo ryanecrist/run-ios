@@ -59,15 +59,7 @@ class ListViewController: UITableViewController {
     @objc
     func createRun(_ sender: UIBarButtonItem) {
         
-        print("CREATE RUN")
-        
-        HTTPClient.client()
-            .request(method: .post,
-                     path: "runs/create",
-                     headers: ["Content-Type": "application/json"],
-                     with: HTTPRequestEncoders.json,
-                     data: Run.Create.Request())
-            .start(with: HTTPResponseDecoders.string) { (response: HTTPResponse<String>) in
+        RunTasticAPI.createRun().start() { (response: HTTPResponse<String>) in
 
                 if let runId = response.value {
                     print("new run ID = \(runId)")

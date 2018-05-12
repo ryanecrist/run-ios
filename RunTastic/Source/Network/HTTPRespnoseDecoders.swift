@@ -37,3 +37,18 @@ struct HTTPResponseDecoders {
         return try jsonDecoder.decode(T.self, from: data)
     }
 }
+
+extension HTTPRequest {
+    
+    func start(completionHandler: ((HTTPResponse<Data>) -> Void)? = nil) {
+        client?.start(self, with: HTTPResponseDecoders.data, completionHandler: completionHandler)
+    }
+    
+    func start(completionHandler: ((HTTPResponse<String>) -> Void)? = nil) {
+        client?.start(self, with: HTTPResponseDecoders.string, completionHandler: completionHandler)
+    }
+    
+    func start<T: Decodable>(completionHandler: ((HTTPResponse<T>) -> Void)? = nil) {
+        client?.start(self, with: HTTPResponseDecoders.json, completionHandler: completionHandler)
+    }
+}

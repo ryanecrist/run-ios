@@ -22,6 +22,7 @@
 		94A9D81B20A70D1D00D175C8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D81920A70D1D00D175C8 /* MapView.swift */; };
 		94A9D81F20A70DD200D175C8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D81E20A70DD200D175C8 /* LocationManager.swift */; };
 		94A9D82220A70DFE00D175C8 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82120A70DFE00D175C8 /* Run.swift */; };
+		94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82420A7191400D175C8 /* RunTasticAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		94A9D81920A70D1D00D175C8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		94A9D81E20A70DD200D175C8 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		94A9D82120A70DFE00D175C8 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		94A9D82420A7191400D175C8 /* RunTasticAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTasticAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		94A9D7F720A70C2000D175C8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				94A9D82320A718F800D175C8 /* API */,
 				94A9D82020A70DEF00D175C8 /* Models */,
 				94A9D81D20A70DBD00D175C8 /* Managers */,
 				94A9D80520A70CC400D175C8 /* Network */,
@@ -166,6 +169,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		94A9D82320A718F800D175C8 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				94A9D82420A7191400D175C8 /* RunTasticAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -244,6 +255,7 @@
 				94A9D81020A70CE200D175C8 /* HTTPRespnoseDecoders.swift in Sources */,
 				94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */,
 				94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */,
+				94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */,
 				94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */,
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */,
