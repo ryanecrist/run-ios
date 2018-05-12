@@ -23,6 +23,8 @@
 		94A9D81F20A70DD200D175C8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D81E20A70DD200D175C8 /* LocationManager.swift */; };
 		94A9D82220A70DFE00D175C8 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82120A70DFE00D175C8 /* Run.swift */; };
 		94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82420A7191400D175C8 /* RunTasticAPI.swift */; };
+		94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */; };
+		94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82920A71DE000D175C8 /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		94A9D81E20A70DD200D175C8 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		94A9D82120A70DFE00D175C8 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 		94A9D82420A7191400D175C8 /* RunTasticAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTasticAPI.swift; sourceTree = "<group>"; };
+		94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		94A9D82920A71DE000D175C8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 		94A9D80420A70CBF00D175C8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				94A9D82620A71D9800D175C8 /* Details */,
 				94A9D81420A70CF400D175C8 /* List */,
 				94A9D81520A70CF800D175C8 /* Map */,
 			);
@@ -175,6 +180,15 @@
 				94A9D82420A7191400D175C8 /* RunTasticAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		94A9D82620A71D9800D175C8 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				94A9D82920A71DE000D175C8 /* DetailsView.swift */,
+				94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +274,9 @@
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */,
 				94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */,
+				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
 				94A9D81F20A70DD200D175C8 /* LocationManager.swift in Sources */,
+				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

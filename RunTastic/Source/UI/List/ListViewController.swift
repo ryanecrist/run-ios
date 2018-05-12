@@ -61,14 +61,12 @@ class ListViewController: UITableViewController {
         
         RunTasticAPI.createRun().start() { (response: HTTPResponse<String>) in
 
-                if let runId = response.value {
-                    print("new run ID = \(runId)")
-                }
-
-                print("RESPONSE: = \(response)")
+            if let rawRunId = response.value,
+                let runId = Int(rawRunId) {
+                let detailsViewController = DetailsViewController(runId: runId)
+                self.navigationController?.pushViewController(detailsViewController, animated: true)
             }
-        
-//        navigationController?.pushViewController(MapViewController(), animated: true)
+        }
     }
     
     @objc
@@ -94,12 +92,20 @@ class ListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "runCell", for: indexPath)
         let run = runs[indexPath.row]
 
-        cell.textLabel?.text = "\(run.id) : \(run.startTime) : \(String(describing: run.endTime))"
+        cell.textLabel?.text = "\(run.id)"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return runs.count
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let run = runs[indexPath.row]
+        let detailsViewController = DetailsViewController(runId: run.id)
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
 }
