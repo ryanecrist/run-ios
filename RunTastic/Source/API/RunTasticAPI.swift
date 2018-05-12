@@ -19,4 +19,8 @@ class RunTasticAPI {
                                            with: HTTPRequestEncoders.json,
                                            data: Run.Create.Request())
     }
+    
+    static func listRuns() -> HTTPRequest {
+        return HTTPClient.client().request(path: "runs")
+    }
 }

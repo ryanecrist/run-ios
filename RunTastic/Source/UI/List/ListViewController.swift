@@ -44,14 +44,12 @@ class ListViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        HTTPClient.client()
-            .request(path: "runs")
-            .start(with: HTTPResponseDecoders.json) { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.listRuns().start() { (response: HTTPResponse<[Run]>) in
                 
-                if let runs = response.value {
-                    self.runs = runs
-                }
+            if let runs = response.value {
+                self.runs = runs
             }
+        }
     }
     
     // MARK: - Action Handlers
@@ -72,16 +70,14 @@ class ListViewController: UITableViewController {
     @objc
     func refreshList(_ sender: UIRefreshControl) {
         
-        HTTPClient.client()
-            .request(path: "runs")
-            .start(with: HTTPResponseDecoders.json) { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.listRuns().start() { (response: HTTPResponse<[Run]>) in
                 
-                if let runs = response.value {
-                    self.runs = runs
-                }
-                
-                sender.endRefreshing()
+            if let runs = response.value {
+                self.runs = runs
             }
+            
+            sender.endRefreshing()
+        }
     }
     
     // MARK: - UITableViewDataSource
