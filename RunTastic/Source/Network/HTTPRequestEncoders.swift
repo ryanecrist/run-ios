@@ -22,5 +22,10 @@ struct HTTPRequestEncoders {
     
     static func json<T: Encodable>(_ value: T, request: inout URLRequest?) {
         request?.httpBody = try? jsonEncoder.encode(value)
+        
+        if let data = request?.httpBody,
+            let text = String(data: data, encoding: .utf8) {
+            print("JSON = \(text)")
+        }
     }
 }

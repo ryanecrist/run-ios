@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import UIKit
 
 @UIApplicationMain
@@ -20,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         
         // Setup location manager.
-        LocationManager.shared.requestAlwaysAuthorization()
-        LocationManager.shared.startUpdatingLocation()
+        let locationManager = CLLocationManager()
+        locationManager.requestAlwaysAuthorization()
         
         // Setup main view controller.
         let listViewController = ListViewController()

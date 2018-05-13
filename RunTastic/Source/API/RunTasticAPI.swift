@@ -48,4 +48,12 @@ class RunTasticAPI {
     static func getRunRoute(with id: Int) -> HTTPRequest {
         return client.request(path: "runs/\(id)/route")
     }
+    
+    static func addRunLocations(with id: Int, locations: [Location.Update]) -> HTTPRequest {
+        return client.request(method: .post,
+                              path: "runs/\(id)/geoPoints",
+                              headers: ["Content-Type": "application/json"],
+                              with: HTTPRequestEncoders.json,
+                              data: locations)
+    }
 }

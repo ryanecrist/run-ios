@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import MapKit
 import UIKit
 
@@ -13,7 +14,13 @@ class DetailsViewController: UIViewController {
     
     lazy var detailsView = DetailsView()
     
+    let locationManager = CLLocationManager()
+    
     let runId: Int
+    
+    var lastUpdateTime = Date().timeIntervalSince1970
+    
+    var locationBatch: [Location.Update] = []
     
     init(runId: Int) {
         self.runId = runId
@@ -40,6 +47,9 @@ class DetailsViewController: UIViewController {
         // Setup buttons.
         detailsView.startButton.addTarget(self, action: #selector(startRun), for: .touchUpInside)
         detailsView.finishButton.addTarget(self, action: #selector(finishRun), for: .touchUpInside)
+        
+        // Setup location manager.
+        locationManager.delegate = self
         
         // Get run.
         RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run>) in
@@ -120,6 +130,9 @@ class DetailsViewController: UIViewController {
             .start() { (response: HTTPEmptyResponse) in
                 print("RUN STARTED!: \(response.result)")
             }
+        
+        // Start location manager.
+        locationManager.startUpdatingLocation()
     }
     
     @objc
@@ -128,12 +141,49 @@ class DetailsViewController: UIViewController {
         // Update buttons.
         detailsView.finishButton.isHidden = true
         
-        // Finish run.
-        RunTasticAPI.finishRun(with: runId,
-                               endTime: Date.millisecondsSinceEpoch)
+        // Stop location manager.
+        locationManager.stopUpdatingLocation()
+        
+        // Post any remaining locations.
+        RunTasticAPI.addRunLocations(with: runId,
+                                     locations: locationBatch)
             .start() { (response: HTTPEmptyResponse) in
-                print("RUN FINISHED!: \(response.result)")
+                print("ADDED LOCATIONS!: \(response.result)")
+                
+                // Finish run.
+                RunTasticAPI.finishRun(with: self.runId,
+                                       endTime: Date.millisecondsSinceEpoch)
+                    .start() { (response: HTTPEmptyResponse) in
+                        print("RUN FINISHED!: \(response.result)")
+                    }
             }
+        locationBatch.removeAll()
+    }
+}
+
+extension DetailsViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let currentTime = Date().timeIntervalSince1970
+        
+        locationBatch += locations.map({ Location.Update(latitude: $0.coordinate.latitude,
+                                                         longitude: $0.coordinate.longitude,
+                                                         elevation: $0.altitude,
+                                                         timestampMs: $0.timestamp.millisecondsSinceEpoch) })
+        
+        // Only update locations every 10 seconds.
+        if (currentTime - lastUpdateTime) >= 10 {
+            RunTasticAPI.addRunLocations(with: runId,
+                                         locations: locationBatch)
+                .start() { (response: HTTPEmptyResponse) in
+                    print("ADDED LOCATIONS!: \(response.result)")
+                }
+            locationBatch.removeAll()
+            lastUpdateTime = currentTime
+        }
+        
+        print("LOCATION UPDATE = \(locations)")
     }
 }
 

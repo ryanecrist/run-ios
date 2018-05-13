@@ -36,4 +36,18 @@ struct Location: Decodable {
         case elevation = "elevation"
         case timestampMs = "timestamp"
     }
+    
+    struct Update: Encodable {
+        let latitude: Double
+        let longitude: Double
+        let elevation: Double?
+        let timestampMs: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case latitude = "latitude"
+            case longitude = "longitude"
+            case elevation = "elevation"
+            case timestampMs = "timestamp"
+        }
+    }
 }

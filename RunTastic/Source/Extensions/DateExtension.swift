@@ -14,6 +14,10 @@ extension Date {
         return Int(Date().timeIntervalSince1970 * 1000)
     }
     
+    var millisecondsSinceEpoch: Int {
+        return Int(timeIntervalSince1970 * 1000)
+    }
+    
     init(millisecondsSinceEpoch: Int) {
         self.init(timeIntervalSince1970: TimeInterval(millisecondsSinceEpoch / 1000))
     }
