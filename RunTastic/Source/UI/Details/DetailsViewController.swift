@@ -22,6 +22,8 @@ class DetailsViewController: UIViewController {
     
     var locationBatch: [Location.Update] = []
     
+    var startTimeMs: Int = 0
+    
     init(runId: Int) {
         self.runId = runId
         super.init(nibName: nil, bundle: nil)
@@ -95,7 +97,11 @@ class DetailsViewController: UIViewController {
                 
                 // Set the visible region of the map to contain the route.
                 self.detailsView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
-                                                           edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20), animated: false)
+                                                           edgePadding: UIEdgeInsets(top: 25,
+                                                                                     left: 25,
+                                                                                     bottom: 25,
+                                                                                     right: 25),
+                                                           animated: false)
                 self.detailsView.mapView.add(routeLine)
                 
                 // Add the start point.
@@ -125,8 +131,9 @@ class DetailsViewController: UIViewController {
         detailsView.finishButton.isHidden = false
         
         // Start run.
+        startTimeMs = Date.millisecondsSinceEpoch
         RunTasticAPI.startRun(with: runId,
-                              startTime: Date.millisecondsSinceEpoch)
+                              startTime: startTimeMs)
             .start() { (response: HTTPEmptyResponse) in
                 print("RUN STARTED!: \(response.result)")
             }
@@ -167,10 +174,12 @@ extension DetailsViewController: CLLocationManagerDelegate {
         
         let currentTime = Date().timeIntervalSince1970
         
+        // Filter out any locations after the start timestamp.
         locationBatch += locations.map({ Location.Update(latitude: $0.coordinate.latitude,
                                                          longitude: $0.coordinate.longitude,
                                                          elevation: $0.altitude,
                                                          timestampMs: $0.timestamp.millisecondsSinceEpoch) })
+                                  .filter({ $0.timestampMs >= startTimeMs })
         
         // Only update locations every 10 seconds.
         if (currentTime - lastUpdateTime) >= 10 {
