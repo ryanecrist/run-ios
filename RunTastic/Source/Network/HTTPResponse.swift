@@ -14,6 +14,8 @@ struct HTTPResponse<T> {
     
     let urlResponse: HTTPURLResponse?
     
+    var data: Data?
+    
     var value: T? {
         return result.value
     }
@@ -22,8 +24,10 @@ struct HTTPResponse<T> {
         return result.error
     }
     
-    init(result: HTTPResult<T>,
+    init(data: Data? = nil,
+         result: HTTPResult<T>,
          urlResponse: HTTPURLResponse? = nil) {
+        self.data = data
         self.result = result
         self.urlResponse = urlResponse
     }

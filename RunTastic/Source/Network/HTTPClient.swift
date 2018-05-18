@@ -166,7 +166,8 @@ class HTTPClient {
                 let result = self.decodedResult(data: data, decoder: responseDecoder)
                 
                 DispatchQueue.main.async {
-                    completionHandler?(HTTPResponse<T>(result: result,
+                    completionHandler?(HTTPResponse<T>(data: data,
+                                                       result: result,
                                                        urlResponse: urlResponse))
                 }
             }
