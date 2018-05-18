@@ -12,7 +12,7 @@ class RunTasticAPI {
     
     static let client: HTTPClient = {
         // Setup HTTP client.
-        let configuration = HTTPClientConfiguration(baseEndpoint: "https://buchta-raceapi.herokuapp.com")
+        let configuration = HTTPClientConfiguration(baseEndpoint: Configuration.baseEndpoint)
         return HTTPClient.configure(name: "RunTastic", with: configuration)
     }()
     
