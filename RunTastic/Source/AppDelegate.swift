@@ -11,6 +11,8 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let locationManager = CLLocationManager()
 
     var window: UIWindow?
     
@@ -21,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         
         // Setup location manager.
-        let locationManager = CLLocationManager()
         locationManager.requestAlwaysAuthorization()
         
         // Setup main view controller.

@@ -14,7 +14,7 @@ class DetailsViewController: UIViewController {
     
     lazy var detailsView = DetailsView()
     
-    let locationManager = CLLocationManager()
+    let locationManager = (UIApplication.shared.delegate as! AppDelegate).locationManager
     
     let runId: Int
     
