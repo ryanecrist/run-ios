@@ -22,37 +22,49 @@ class RunTasticAPI {
     }
     
     static func getRuns() -> HTTPRequest {
-        return client.request(path: "runs")
+        return client.request(path: "runs",
+                              headers: ["Authorization": "Bearer token",
+                                        "ID": "Email someone@example.com"])
     }
     
     static func getRun(with id: Int) -> HTTPRequest {
-        return client.request(path: "runs/\(id)")
+        return client.request(path: "runs/\(id)",
+                              headers: ["Authorization": "Bearer token",
+                                        "ID": "Email someone@example.com"])
     }
     
     static func startRun(with id: Int, startTime: Int) -> HTTPRequest {
         return client.request(method: .post,
-                              path: "runs/\(id)/start",
-                              headers: ["Content-Type": "application/json"],
-                              with: HTTPRequestEncoders.json,
-                              data: Run.Start.Request(timestamp: startTime))
+                                path: "runs/\(id)/start",
+                             headers: ["Authorization": "Bearer token",
+                                       "Content-Type": "application/json",
+                                       "ID": "Email someone@example.com"],
+                                with: HTTPRequestEncoders.json,
+                                data: Run.Start.Request(timestamp: startTime))
     }
     
     static func finishRun(with id: Int, endTime: Int) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/finish",
-                              headers: ["Content-Type": "application/json"],
+                           headers: ["Authorization": "Bearer token",
+                                     "Content-Type": "application/json",
+                                     "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
                               data: Run.Finish.Request(timestamp: endTime))
     }
     
     static func getRunRoute(with id: Int) -> HTTPRequest {
-        return client.request(path: "runs/\(id)/route")
+        return client.request(path: "runs/\(id)/route",
+                          headers: ["Authorization": "Bearer token",
+                                    "ID": "Email someone@example.com"])
     }
     
     static func addRunLocations(with id: Int, locations: [Location.Update]) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/geoPoints",
-                              headers: ["Content-Type": "application/json"],
+                          headers: ["Authorization": "Bearer token",
+                                    "Content-Type": "application/json",
+                                    "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
                               data: locations)
     }
