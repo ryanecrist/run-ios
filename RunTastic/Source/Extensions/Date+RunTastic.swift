@@ -1,5 +1,5 @@
 //
-//  DateExtension.swift
+//  Date+RunTastic.swift
 //  RunTastic
 //
 //  Created by Ryan Crist on 5/12/18.

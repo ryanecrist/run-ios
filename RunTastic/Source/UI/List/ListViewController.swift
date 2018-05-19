@@ -1,6 +1,6 @@
 //
 //  ListViewController.swift
-//  RacYa
+//  RunTastic
 //
 //  Created by Ryan Crist on 5/7/18.
 //  Copyright © 2018 Shrubtactic. All rights reserved.
@@ -22,14 +22,17 @@ class ListViewController: UITableViewController {
     
     convenience init() {
         self.init(nibName: nil, bundle: nil)
+        
+        // Setup title and tab bar item.
+        title = "History"
+        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "History"), selectedImage: #imageLiteral(resourceName: "History"))
     }
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Runs"
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(createRun))

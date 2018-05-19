@@ -19,19 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Setup global navigation bar appearance.
+        // Setup global navigation/tab bar appearance.
+        UINavigationBar.appearance().barTintColor = .primary
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
+        UITabBar.appearance().isTranslucent = false
         
         // Setup location manager.
         locationManager.requestAlwaysAuthorization()
         
         // Setup main view controller.
-        let listViewController = ListViewController()
-        let navigationController = UINavigationController(rootViewController: listViewController)
-        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers =
+            [UINavigationController(rootViewController: MapViewController()),
+             UINavigationController(rootViewController: ListViewController())]
+
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navigationController
+        window?.rootViewController = tabBarController
+        window?.tintColor = UIColor(named: "Primary")
         window?.makeKeyAndVisible()
         
         return true
