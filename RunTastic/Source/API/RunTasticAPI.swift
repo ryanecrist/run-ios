@@ -18,7 +18,9 @@ class RunTasticAPI {
     
     static func createRun() -> HTTPRequest {
         return client.request(method: .post,
-                              path: "runs/create")
+                              path: "runs/create",
+                              headers: ["Authorization": "Bearer token",
+                                        "ID": "Email someone@example.com"])
     }
     
     static func getRuns() -> HTTPRequest {
