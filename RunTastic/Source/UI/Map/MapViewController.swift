@@ -39,7 +39,18 @@ class MapViewController: UIViewController {
     
     @objc
     func actionButtonPressed(_ sender: UIButton) {
-        print("ACTION!")
+
+        // Update the button (disabling animations is required due to hiding the tab bar).
+        UIView.performWithoutAnimation {
+            sender.backgroundColor = .start
+            sender.setTitle("START", for: .normal)
+            sender.layoutIfNeeded()
+        }
+    
+        // Hide the tab bar.
+        if let tabBarController = tabBarController {
+            tabBarController.setTabBarHidden(!tabBarController.isTabBarHidden)
+        }
     }
 }
 

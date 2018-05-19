@@ -11,4 +11,5 @@ import UIKit
 extension UIColor {
     static let primary = UIColor(named: "Primary")
     static let secondary = UIColor(named: "Secondary")
+    static let start = UIColor(named: "Start")
 }

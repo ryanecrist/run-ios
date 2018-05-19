@@ -12,6 +12,7 @@
 		9417600020A5232700A572D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94175FFE20A5232700A572D6 /* LaunchScreen.storyboard */; };
 		948E823520AE666A003E7DEF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823420AE666A003E7DEF /* Configuration.swift */; };
 		948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */; };
+		948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */; };
 		94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */; };
 		94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80720A70CE100D175C8 /* HTTPClient.swift */; };
 		94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80820A70CE200D175C8 /* HTTPResult.swift */; };
@@ -40,6 +41,7 @@
 		948E823420AE666A003E7DEF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		948E823620AE70AC003E7DEF /* Info-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RunTastic.swift"; sourceTree = "<group>"; };
+		948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+RunTastic.swift"; sourceTree = "<group>"; };
 		94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestEncoders.swift; sourceTree = "<group>"; };
 		94A9D80720A70CE100D175C8 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		94A9D80820A70CE200D175C8 /* HTTPResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */,
 				948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */,
+				948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				94A9D83120A78DB600D175C8 /* Location.swift in Sources */,
 				94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */,
 				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
+				948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */,
 				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
 				94A9D84120AB880E00D175C8 /* MapViewController.swift in Sources */,
 			);
