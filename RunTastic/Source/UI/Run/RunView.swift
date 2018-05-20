@@ -78,7 +78,7 @@ class RunView: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.rightAnchor.constraint(equalTo: rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            headerViewHeightConstraint,
+//            headerViewHeightConstraint,
         ])
         
         // Constrain user tracking button.

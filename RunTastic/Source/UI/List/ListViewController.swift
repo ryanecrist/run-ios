@@ -12,7 +12,7 @@ class ListViewController: UITableViewController {
     
     // MARK: - Public Properties
     
-    var runs: [Run] = [] {
+    var runs: [Run2] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -47,7 +47,7 @@ class ListViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run2]>) in
                 
             if let runs = response.value {
                 self.runs = runs
@@ -73,7 +73,7 @@ class ListViewController: UITableViewController {
     @objc
     func refreshList(_ sender: UIRefreshControl) {
         
-        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run]>) in
+        RunTasticAPI.getRuns().start() { (response: HTTPResponse<[Run2]>) in
                 
             if let runs = response.value {
                 self.runs = runs

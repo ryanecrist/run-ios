@@ -34,7 +34,7 @@ class RunTasticAPI {
                               path: "runs/\(id)/start",
                               headers: ["Content-Type": "application/json"],
                               with: HTTPRequestEncoders.json,
-                              data: Run.Start.Request(timestamp: startTime))
+                              data: Run2.Start.Request(timestamp: startTime))
     }
     
     static func finishRun(with id: Int, endTime: Int) -> HTTPRequest {
@@ -42,7 +42,7 @@ class RunTasticAPI {
                               path: "runs/\(id)/finish",
                               headers: ["Content-Type": "application/json"],
                               with: HTTPRequestEncoders.json,
-                              data: Run.Finish.Request(timestamp: endTime))
+                              data: Run2.Finish.Request(timestamp: endTime))
     }
     
     static func getRunRoute(with id: Int) -> HTTPRequest {

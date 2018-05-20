@@ -54,7 +54,7 @@ class DetailsViewController: UIViewController {
         locationManager.delegate = self
         
         // Get run.
-        RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run>) in
+        RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run2>) in
             
             if let run = response.value {
             

@@ -22,7 +22,7 @@
 		94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80B20A70CE200D175C8 /* HTTPClientConfiguration.swift */; };
 		94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80C20A70CE200D175C8 /* HTTPResponse.swift */; };
 		94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D81620A70D0F00D175C8 /* ListViewController.swift */; };
-		94A9D82220A70DFE00D175C8 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82120A70DFE00D175C8 /* Run.swift */; };
+		94A9D82220A70DFE00D175C8 /* Run2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82120A70DFE00D175C8 /* Run2.swift */; };
 		94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82420A7191400D175C8 /* RunTasticAPI.swift */; };
 		94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */; };
 		94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82920A71DE000D175C8 /* DetailsView.swift */; };
@@ -31,6 +31,8 @@
 		94A9D83120A78DB600D175C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83020A78DB600D175C8 /* Location.swift */; };
 		94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* RunViewController.swift */; };
 		94A9D84220AB880E00D175C8 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D84020AB880E00D175C8 /* RunView.swift */; };
+		94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4D20B1A743000A2E24 /* RunManager.swift */; };
+		94F81C5020B1AADB000A2E24 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4F20B1AADB000A2E24 /* Run.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +54,7 @@
 		94A9D80B20A70CE200D175C8 /* HTTPClientConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientConfiguration.swift; sourceTree = "<group>"; };
 		94A9D80C20A70CE200D175C8 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		94A9D81620A70D0F00D175C8 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		94A9D82120A70DFE00D175C8 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		94A9D82120A70DFE00D175C8 /* Run2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run2.swift; sourceTree = "<group>"; };
 		94A9D82420A7191400D175C8 /* RunTasticAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTasticAPI.swift; sourceTree = "<group>"; };
 		94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		94A9D82920A71DE000D175C8 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,8 @@
 		94A9D83020A78DB600D175C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		94A9D83F20AB880E00D175C8 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		94A9D84020AB880E00D175C8 /* RunView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
+		94F81C4D20B1A743000A2E24 /* RunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunManager.swift; sourceTree = "<group>"; };
+		94F81C4F20B1AADB000A2E24 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 				948E823420AE666A003E7DEF /* Configuration.swift */,
 				94A9D82320A718F800D175C8 /* API */,
 				94A9D82D20A74EFE00D175C8 /* Extensions */,
+				94F81C4C20B1A6EF000A2E24 /* Managers */,
 				94A9D82020A70DEF00D175C8 /* Models */,
 				94A9D80520A70CC400D175C8 /* Network */,
 				94A9D80420A70CBF00D175C8 /* UI */,
@@ -168,7 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				94A9D83020A78DB600D175C8 /* Location.swift */,
-				94A9D82120A70DFE00D175C8 /* Run.swift */,
+				94A9D82120A70DFE00D175C8 /* Run2.swift */,
+				94F81C4F20B1AADB000A2E24 /* Run.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -209,6 +215,14 @@
 				94A9D83F20AB880E00D175C8 /* RunViewController.swift */,
 			);
 			path = Run;
+			sourceTree = "<group>";
+		};
+		94F81C4C20B1A6EF000A2E24 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				94F81C4D20B1A743000A2E24 /* RunManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,7 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94A9D82220A70DFE00D175C8 /* Run.swift in Sources */,
+				94A9D82220A70DFE00D175C8 /* Run2.swift in Sources */,
+				94F81C5020B1AADB000A2E24 /* Run.swift in Sources */,
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
 				94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */,
 				94A9D81020A70CE200D175C8 /* HTTPRespnoseDecoders.swift in Sources */,
@@ -302,6 +317,7 @@
 				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
 				948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */,
 				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
+				94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */,
 				94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

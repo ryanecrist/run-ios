@@ -11,6 +11,8 @@ import UIKit
 
 class RunViewController: UIViewController {
     
+    let runManager = RunManager()
+    
     lazy var runView = RunView()
     
     convenience init() {
@@ -28,10 +30,10 @@ class RunViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup run manager.
+        runManager.delegate = self
+        
         // Setup run view.
-        runView.headerView.durationLabel.text = "31:24.45"//"--:--.--"
-        runView.headerView.distanceLabel.text = "4.26 mi"//"0.00 mi"
-        runView.headerView.paceLabel.text = "7:01 / mi"//"0:00 / mi"
         runView.actionButton.setTitle("NEW RUN", for: .normal)
         runView.mapView.delegate = self
         runView.mapView.showsUserLocation = true
@@ -53,12 +55,15 @@ class RunViewController: UIViewController {
         
         switch state {
         case .new:
+            runManager.createRun()
             state = .start
             break
         case .start:
+            runManager.startRun()
             state = .finish
             break
         case .finish:
+            runManager.finishRun()
             state = .new
             break
         }
@@ -68,7 +73,10 @@ class RunViewController: UIViewController {
             switch state {
             case .new:
                 sender.backgroundColor = .secondary
-                sender.setTitle("NEW", for: .normal)
+                sender.setTitle("NEW RUN", for: .normal)
+                runView.headerView.durationLabel.text = "00:00:00.00"
+                runView.headerView.distanceLabel.text = "0.00 mi"
+                runView.headerView.paceLabel.text = "0:00 / mi"
                 break
             case .start:
                 sender.backgroundColor = .start
@@ -82,10 +90,6 @@ class RunViewController: UIViewController {
             
             sender.layoutIfNeeded()
         }
-        
-        runView.headerView.durationLabel.text = "--:--.--"
-        runView.headerView.distanceLabel.text = "0.00 mi"
-        runView.headerView.paceLabel.text = "0:00 / mi"
         
         // Reset header.
         runView.headerView.isCollapsed = state == .new
@@ -104,6 +108,19 @@ extension RunViewController: MKMapViewDelegate {
         
         // Follow user by default once map loads.
         mapView.setUserTrackingMode(.follow, animated: true)
+    }
+}
+
+extension RunViewController: RunManagerDelegate {
+    
+    func runManager(_ runManager: RunManager, didUpdateMetricsForRun run: Run) {
+        
+        let hours = Int(run.duration) / 3600
+        let minutes = (Int(run.duration) - (hours * 3600)) / 60
+        let seconds = run.duration - TimeInterval(hours * 3600) - TimeInterval(minutes * 60)
+        
+        runView.headerView.durationLabel.text =
+            String(format: "%02d:%02d:%05.2f", hours, minutes, seconds)
     }
 }
 

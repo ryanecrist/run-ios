@@ -10,6 +10,10 @@ import UIKit
 
 class RunHeaderView: UIView {
     
+    override static var requiresConstraintBasedLayout: Bool {
+        return true
+    }
+    
     var isCollapsed = true {
         didSet {
 
@@ -56,6 +60,7 @@ class RunHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // Setup self.
         backgroundColor = .primary
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -63,36 +68,45 @@ class RunHeaderView: UIView {
         layer.shadowRadius = 2.5
         
         // Setup duration label.
-        durationLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        durationLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 36, weight: .medium)
+        durationLabel.text = "00:00:00.00"
+        durationLabel.textAlignment = .center
         durationLabel.textColor = .white
         
-        distanceLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        // Setup distance label.
+        distanceLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
+        distanceLabel.text = "0.00 mi"
         distanceLabel.textColor = .white
         
-        paceLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        // Setup pace label.
+        paceLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
+        paceLabel.text = "0:00 / mi"
         paceLabel.textColor = .white
         
+        // Setup timer image view.
         let timerImage = #imageLiteral(resourceName: "Timer")
         let timerImageView = UIImageView(image: timerImage)
         timerImageView.tintColor = .white
         
         let topStackView = UIStackView(arrangedSubviews: [timerImageView, durationLabel])
         topStackView.alignment = .center
-        topStackView.isHidden = true
         topStackView.alpha = 0
+        topStackView.isHidden = true
         topStackView.isLayoutMarginsRelativeArrangement = true
-        topStackView.spacing = 10
         topStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: timerImage.size.width + topStackView.spacing)
+        topStackView.spacing = 10
         
+        // Setup bottom stack view.
         let bottomStackView = UIStackView(arrangedSubviews: [distanceLabel, paceLabel])
-        bottomStackView.isHidden = true
         bottomStackView.alpha = 0
+        bottomStackView.isHidden = true
         bottomStackView.spacing = 10
         
         stackView.alignment = .center
-        stackView.distribution = .fill
         stackView.axis = .vertical
+        stackView.distribution = .fill
         stackView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.addArrangedSubview(topStackView)
@@ -105,6 +119,7 @@ class RunHeaderView: UIView {
             stackView.rightAnchor.constraint(equalTo: rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor),
+            heightAnchor.constraint(greaterThanOrEqualToConstant: 20), // TODO this may be more appropriate to set on the container view.
         ])
     }
     
