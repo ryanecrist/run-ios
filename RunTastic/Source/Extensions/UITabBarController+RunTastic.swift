@@ -16,6 +16,8 @@ extension UITabBarController {
     
     func setTabBarHidden(_ hidden: Bool, animated: Bool) {
         
+        guard hidden != isTabBarHidden else { return }
+        
         let duration = animated ? 0.25 : 0
         let heightOffset = hidden ? tabBar.frame.height : -tabBar.frame.height
         

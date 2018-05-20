@@ -40,13 +40,46 @@ class RunViewController: UIViewController {
         runView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
     }
     
+    enum State {
+        case new
+        case start
+        case finish
+    }
+    
+    var state = State.new
+    
     @objc
     func actionButtonPressed(_ sender: UIButton) {
+        
+        switch state {
+        case .new:
+            state = .start
+            break
+        case .start:
+            state = .finish
+            break
+        case .finish:
+            state = .new
+            break
+        }
 
         // Update the button (disabling animations is required due to hiding the tab bar).
         UIView.performWithoutAnimation {
-            sender.backgroundColor = .start
-            sender.setTitle("START", for: .normal)
+            switch state {
+            case .new:
+                sender.backgroundColor = .secondary
+                sender.setTitle("NEW", for: .normal)
+                break
+            case .start:
+                sender.backgroundColor = .start
+                sender.setTitle("START", for: .normal)
+                break
+            case .finish:
+                sender.backgroundColor = .finish
+                sender.setTitle("FINISH", for: .normal)
+                break
+            }
+            
             sender.layoutIfNeeded()
         }
         
@@ -55,17 +88,12 @@ class RunViewController: UIViewController {
         runView.headerView.paceLabel.text = "0:00 / mi"
         
         // Reset header.
-        runView.headerView.isCollapsed = !runView.headerView.isCollapsed
-        runView.setHeaderViewHidden(!runView.isHeaderViewHidden, animated: true)
-        
-        // Hide the navigation bar.
-        if let navigationController = navigationController {
-            navigationController.setNavigationBarHidden(!navigationController.isNavigationBarHidden, animated: true)
-        }
+        runView.headerView.isCollapsed = state == .new
+        runView.setHeaderViewHidden(state == .new, animated: true)
     
         // Hide the tab bar.
         if let tabBarController = tabBarController {
-            tabBarController.setTabBarHidden(!tabBarController.isTabBarHidden, animated: true)
+            tabBarController.setTabBarHidden(state != .new, animated: true)
         }
     }
 }
