@@ -10,11 +10,6 @@ import UIKit
 
 class RunHeaderView: UIView {
     
-    enum State {
-        case collapsed
-        case expanded
-    }
-    
     var isCollapsed = true {
         didSet {
 
@@ -35,9 +30,8 @@ class RunHeaderView: UIView {
             }
 
             if isCollapsed {
-
-                UIView.animate(withDuration: 0.125, animations: alphaAnimations) { _ in
-                    UIView.animate(withDuration: 0.125, animations: hiddenAnimations)
+                UIView.animate(withDuration: 0.25, animations: alphaAnimations) { _ in
+                    UIView.animate(withDuration: 0.25, animations: hiddenAnimations)
                 }
             } else {
                 UIView.animate(withDuration: 0.25, animations: hiddenAnimations) { _ in
@@ -86,13 +80,11 @@ class RunHeaderView: UIView {
         topStackView.alignment = .center
         topStackView.isHidden = true
         topStackView.alpha = 0
-//        topStackView.isLayoutMarginsRelativeArrangement = true
+        topStackView.isLayoutMarginsRelativeArrangement = true
         topStackView.spacing = 10
-//        topStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: timerImage.size.width + topStackView.spacing)
-//        topStackView.layoutIfNeeded()
+        topStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: timerImage.size.width + topStackView.spacing)
         
         let bottomStackView = UIStackView(arrangedSubviews: [distanceLabel, paceLabel])
-//        bottomStackView.distribution = .fillEqually
         bottomStackView.isHidden = true
         bottomStackView.alpha = 0
         bottomStackView.spacing = 10
@@ -107,16 +99,12 @@ class RunHeaderView: UIView {
         stackView.addArrangedSubview(bottomStackView)
         addSubview(stackView)
         
-        let c = timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor)
-//        c.priority = .defaultLow
-        
         NSLayoutConstraint.activate([
             stackView.leftAnchor.constraint(equalTo: leftAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.rightAnchor.constraint(equalTo: rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            timerImageView.widthAnchor.constraint(equalToConstant: timerImage.size.width),
-            c,
+            timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor),
         ])
     }
     
