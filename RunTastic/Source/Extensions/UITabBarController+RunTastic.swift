@@ -14,7 +14,7 @@ extension UITabBarController {
         return self.tabBar.frame.minY == UIScreen.main.bounds.maxY
     }
     
-    func setTabBarHidden(_ hidden: Bool, animated: Bool = true) {
+    func setTabBarHidden(_ hidden: Bool, animated: Bool) {
         
         let duration = animated ? 0.25 : 0
         let heightOffset = hidden ? tabBar.frame.height : -tabBar.frame.height

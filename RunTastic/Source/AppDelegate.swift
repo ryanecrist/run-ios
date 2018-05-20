@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup main view controller.
         let tabBarController = UITabBarController()
         tabBarController.viewControllers =
-            [UINavigationController(rootViewController: MapViewController()),
+            [RunViewController(),
              UINavigationController(rootViewController: ListViewController())]
 
         // Setup window

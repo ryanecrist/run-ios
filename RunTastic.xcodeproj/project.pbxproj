@@ -13,6 +13,7 @@
 		948E823520AE666A003E7DEF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823420AE666A003E7DEF /* Configuration.swift */; };
 		948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */; };
 		948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */; };
+		948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823E20B0A942003E7DEF /* RunHeaderView.swift */; };
 		94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */; };
 		94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80720A70CE100D175C8 /* HTTPClient.swift */; };
 		94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80820A70CE200D175C8 /* HTTPResult.swift */; };
@@ -28,8 +29,8 @@
 		94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */; };
 		94A9D82F20A74F2600D175C8 /* Date+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */; };
 		94A9D83120A78DB600D175C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83020A78DB600D175C8 /* Location.swift */; };
-		94A9D84120AB880E00D175C8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* MapViewController.swift */; };
-		94A9D84220AB880E00D175C8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D84020AB880E00D175C8 /* MapView.swift */; };
+		94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* RunViewController.swift */; };
+		94A9D84220AB880E00D175C8 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D84020AB880E00D175C8 /* RunView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		948E823620AE70AC003E7DEF /* Info-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RunTastic.swift"; sourceTree = "<group>"; };
 		948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+RunTastic.swift"; sourceTree = "<group>"; };
+		948E823E20B0A942003E7DEF /* RunHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunHeaderView.swift; sourceTree = "<group>"; };
 		94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestEncoders.swift; sourceTree = "<group>"; };
 		94A9D80720A70CE100D175C8 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		94A9D80820A70CE200D175C8 /* HTTPResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
@@ -57,8 +59,8 @@
 		94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsItemView.swift; sourceTree = "<group>"; };
 		94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RunTastic.swift"; sourceTree = "<group>"; };
 		94A9D83020A78DB600D175C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		94A9D83F20AB880E00D175C8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		94A9D84020AB880E00D175C8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		94A9D83F20AB880E00D175C8 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
+		94A9D84020AB880E00D175C8 /* RunView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +137,7 @@
 			children = (
 				94A9D82620A71D9800D175C8 /* Details */,
 				94A9D81420A70CF400D175C8 /* List */,
-				94A9D83E20AB87D900D175C8 /* Map */,
+				94A9D83E20AB87D900D175C8 /* Run */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -199,13 +201,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		94A9D83E20AB87D900D175C8 /* Map */ = {
+		94A9D83E20AB87D900D175C8 /* Run */ = {
 			isa = PBXGroup;
 			children = (
-				94A9D84020AB880E00D175C8 /* MapView.swift */,
-				94A9D83F20AB880E00D175C8 /* MapViewController.swift */,
+				948E823E20B0A942003E7DEF /* RunHeaderView.swift */,
+				94A9D84020AB880E00D175C8 /* RunView.swift */,
+				94A9D83F20AB880E00D175C8 /* RunViewController.swift */,
 			);
-			path = Map;
+			path = Run;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,10 +288,11 @@
 				94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */,
 				94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */,
 				94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */,
-				94A9D84220AB880E00D175C8 /* MapView.swift in Sources */,
+				94A9D84220AB880E00D175C8 /* RunView.swift in Sources */,
 				94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */,
 				94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */,
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
+				948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */,
 				948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */,
 				948E823520AE666A003E7DEF /* Configuration.swift in Sources */,
 				94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */,
@@ -298,7 +302,7 @@
 				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
 				948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */,
 				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
-				94A9D84120AB880E00D175C8 /* MapViewController.swift in Sources */,
+				94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
