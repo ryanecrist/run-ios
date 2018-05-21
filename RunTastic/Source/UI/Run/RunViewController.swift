@@ -121,6 +121,10 @@ extension RunViewController: RunManagerDelegate {
         
         runView.headerView.durationLabel.text =
             String(format: "%02d:%02d:%05.2f", hours, minutes, seconds)
+        
+        let miles = 0.000621371192 * run.distance
+        
+        runView.headerView.distanceLabel.text = String(format: "%.2f mi", miles)
     }
 }
 

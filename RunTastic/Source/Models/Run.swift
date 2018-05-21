@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 
 enum RunState {
@@ -29,5 +30,5 @@ class Run {
     
     var pace: Double = 0
     
-    var route: [Location] = []
+    var route: [CLLocation] = []
 }
