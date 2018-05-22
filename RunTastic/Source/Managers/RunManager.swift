@@ -82,6 +82,21 @@ class RunManager: NSObject {
         // Stop the timer.
         _timer?.invalidate()
     }
+    
+    // MARK: - Private Methods
+    
+    func sumLocations(_ locations: [CLLocation]) -> CLLocationDistance {
+        
+        guard locations.count > 1 else { return 0 }
+        
+        var distance: CLLocationDistance = 0
+        
+        for i in 1 ..< locations.count {
+            distance += locations[i].distance(from: locations[i - 1])
+        }
+        
+        return distance
+    }
 }
 
 extension RunManager: CLLocationManagerDelegate {
@@ -91,13 +106,8 @@ extension RunManager: CLLocationManagerDelegate {
         // Abort if no run is in progress.
         guard let currentRun = currentRun else { return }
         
-        var distance: CLLocationDistance = 0
-        
-        if locations.count > 1 {
-            for i in 1 ..< locations.count {
-                distance += locations[i].distance(from: locations[i - 1])
-            }
-        }
+        // Get the distance of the locations.
+        var distance = sumLocations(locations)
         
         // If there was a previous location.
         if let lastLocation = currentRun.route.last {
@@ -107,7 +117,8 @@ extension RunManager: CLLocationManagerDelegate {
             distance += locations.first!.distance(from: lastLocation)
         }
         
-        // Update the run distance and route.
+        // Update run metrics.
+        currentRun.pace = locations.last!.speed
         currentRun.distance += distance
         currentRun.route += locations
     }

@@ -125,6 +125,12 @@ extension RunViewController: RunManagerDelegate {
         let miles = 0.000621371192 * run.distance
         
         runView.headerView.distanceLabel.text = String(format: "%.2f mi", miles)
+        
+        let secondsPerMile = run.pace > 0 ? (1 / run.pace) * (1 / 0.000621371192) : 0
+        let paceMinutes = Int(secondsPerMile) / 60
+        let paceSeconds = Int(secondsPerMile) - (paceMinutes * 60)
+        
+        runView.headerView.paceLabel.text = String(format: "%d:%02d / mi", paceMinutes, paceSeconds)
     }
 }
 
