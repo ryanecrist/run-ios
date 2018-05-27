@@ -10,6 +10,8 @@
 		94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94175FF520A5232500A572D6 /* AppDelegate.swift */; };
 		94175FFD20A5232600A572D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94175FFC20A5232600A572D6 /* Assets.xcassets */; };
 		9417600020A5232700A572D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94175FFE20A5232700A572D6 /* LaunchScreen.storyboard */; };
+		9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362320BA308E007E1D31 /* TrainingViewController.swift */; };
+		9472362720BA313D007E1D31 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362620BA313D007E1D31 /* SettingsViewController.swift */; };
 		948E823520AE666A003E7DEF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823420AE666A003E7DEF /* Configuration.swift */; };
 		948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */; };
 		948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */; };
@@ -41,6 +43,8 @@
 		94175FFC20A5232600A572D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94175FFF20A5232700A572D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9417600120A5232700A572D6 /* Info-Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
+		9472362320BA308E007E1D31 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
+		9472362620BA313D007E1D31 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		948E823420AE666A003E7DEF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		948E823620AE70AC003E7DEF /* Info-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RunTastic.swift"; sourceTree = "<group>"; };
@@ -104,6 +108,22 @@
 			path = RunTastic;
 			sourceTree = "<group>";
 		};
+		9472362220BA307E007E1D31 /* Training */ = {
+			isa = PBXGroup;
+			children = (
+				9472362320BA308E007E1D31 /* TrainingViewController.swift */,
+			);
+			path = Training;
+			sourceTree = "<group>";
+		};
+		9472362520BA312C007E1D31 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9472362620BA313D007E1D31 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		94A9D7F720A70C2000D175C8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +163,8 @@
 				94A9D82620A71D9800D175C8 /* Details */,
 				94A9D81420A70CF400D175C8 /* List */,
 				94A9D83E20AB87D900D175C8 /* Run */,
+				9472362520BA312C007E1D31 /* Settings */,
+				9472362220BA307E007E1D31 /* Training */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -310,6 +332,7 @@
 				94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */,
 				94A9D84220AB880E00D175C8 /* RunView.swift in Sources */,
 				94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */,
+				9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */,
 				94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */,
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */,
@@ -322,6 +345,7 @@
 				94A9D82A20A71DE000D175C8 /* DetailsView.swift in Sources */,
 				948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */,
 				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
+				9472362720BA313D007E1D31 /* SettingsViewController.swift in Sources */,
 				94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */,
 				94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */,
 			);

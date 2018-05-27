@@ -25,7 +25,7 @@ class ListViewController: UITableViewController {
         
         // Setup title and tab bar item.
         title = "History"
-        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "History"), selectedImage: #imageLiteral(resourceName: "History"))
+//        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "History"), selectedImage: #imageLiteral(resourceName: "History"))
     }
     
     // MARK: - View Lifecycle

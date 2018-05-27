@@ -33,12 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers =
             [RunViewController(),
-             UINavigationController(rootViewController: ListViewController())]
+             UINavigationController(rootViewController: TrainingViewController()),
+             UINavigationController(rootViewController: SettingsViewController())]
 
         // Setup window
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController
-        window?.tintColor = UIColor(named: "Primary")
+        window?.tintColor = .primary
         window?.makeKeyAndVisible()
         
         return true
