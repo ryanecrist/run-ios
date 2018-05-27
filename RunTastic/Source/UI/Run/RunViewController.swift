@@ -20,7 +20,7 @@ class RunViewController: UIViewController {
         
         // Setup title and tab bar item.
         title = "Run"
-        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "Map"), selectedImage: #imageLiteral(resourceName: "Map"))
+        tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "Run"), selectedImage: #imageLiteral(resourceName: "Run"))
     }
 
     override func loadView() {
