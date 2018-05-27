@@ -42,17 +42,18 @@ class RunTasticAPI {
                                         "Content-Type": "application/json",
                                         "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: Run2.Start.Request(timestamp: startTime))
+                              data: StartRunDTO(timestamp: startTime))
     }
     
-    static func finishRun(with id: Int, endTime: Int) -> HTTPRequest {
+    static func finishRun(with id: Int, finishTime: Int, locations: [Location]?) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/finish",
                               headers: ["Authorization": "Bearer token",
                                         "Content-Type": "application/json",
                                         "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: Run2.Finish.Request(timestamp: endTime))
+                              data: FinishRunDTO(timestamp: finishTime,
+                                                 locations: locations?.map({ LocationDTO($0) })))
     }
     
     static func getRunRoute(with id: Int) -> HTTPRequest {
@@ -61,13 +62,42 @@ class RunTasticAPI {
                                         "ID": "Email someone@example.com"])
     }
     
-    static func addRunLocations(with id: Int, locations: [Location.Update]) -> HTTPRequest {
+    static func addRunLocations(with id: Int, locations: [Location]) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/geoPoints",
                               headers: ["Authorization": "Bearer token",
                                         "Content-Type": "application/json",
                                         "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: locations)
+                              data: locations.map({ LocationDTO($0) }))
     }
 }
+
+struct CreateRunDTO: Codable {
+    let id: Int
+}
+
+struct StartRunDTO: Codable {
+    let timestamp: Int
+}
+
+struct FinishRunDTO: Codable {
+    let timestamp: Int
+    let locations: [LocationDTO]?
+}
+
+struct LocationDTO: Codable {
+    
+    let latitude: Double
+    let longitude: Double
+    let elevation: Double?
+    let timestamp: Int
+    
+    init(_ location: Location) {
+        self.latitude = location.latitude
+        self.longitude = location.longitude
+        self.elevation = location.elevation
+        self.timestamp = location.timestamp.millisecondsSinceEpoch
+    }
+}
+

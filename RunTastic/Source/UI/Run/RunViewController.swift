@@ -42,72 +42,157 @@ class RunViewController: UIViewController {
         runView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
     }
     
-    enum State {
-        case new
-        case start
-        case finish
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Track user by default.
+        runView.mapView.setUserTrackingMode(.follow, animated: true)
     }
-    
-    var state = State.new
     
     @objc
     func actionButtonPressed(_ sender: UIButton) {
         
-        switch state {
-        case .new:
-            runManager.createRun()
-            state = .start
-            break
-        case .start:
-            runManager.startRun()
-            state = .finish
-            break
-        case .finish:
-            runManager.finishRun()
-            state = .new
-            break
-        }
-
-        // Update the button (disabling animations is required due to hiding the tab bar).
-        UIView.performWithoutAnimation {
-            switch state {
-            case .new:
-                sender.backgroundColor = .secondary
-                sender.setTitle("NEW RUN", for: .normal)
-                runView.headerView.durationLabel.text = "00:00:00.00"
-                runView.headerView.distanceLabel.text = "0.00 mi"
-                runView.headerView.paceLabel.text = "0:00 / mi"
-                break
-            case .start:
-                sender.backgroundColor = .start
-                sender.setTitle("START", for: .normal)
-                break
-            case .finish:
+        // Check if there is an existing run.
+        if let currentRun = runManager.currentRun {
+            
+            switch currentRun.state {
+            case .created:
+                
+                // Start run.
+                runManager.startRun()
+                
+                // Update action button.
                 sender.backgroundColor = .finish
                 sender.setTitle("FINISH", for: .normal)
-                break
+                
+            case .started:
+                
+                // Finish run.
+                runManager.finishRun()
+                
+                // Hide user (for now).
+                runView.mapView.showsUserLocation = false
+                runView.mapView.userTrackingMode = .none
+                
+                // Show finished run on map.
+                updateMapWithFinishedRun()
+                
+                // Update action button.
+                sender.backgroundColor = .secondary
+                sender.setTitle("DONE", for: .normal)
+               
+            case .finished:
+                
+                // Reset the run manager.
+                runManager.reset()
+                
+                // Clear the map.
+                runView.mapView.removeOverlays(runView.mapView.overlays)
+                runView.mapView.removeAnnotations(runView.mapView.annotations)
+                
+                // Show/track the user (again).
+                runView.mapView.showsUserLocation = true
+                runView.mapView.setUserTrackingMode(.follow, animated: true)
+                
+                // Update action button.
+                sender.backgroundColor = .secondary
+                sender.setTitle("NEW RUN", for: .normal)
+                
+                // Hide header.
+                runView.headerView.isCollapsed = true
+                runView.setHeaderViewHidden(true, animated: true)
+                
+                // Hide the tab bar.
+                tabBarController?.setTabBarHidden(false, animated: true)
             }
             
-            sender.layoutIfNeeded()
+        } else {
+            
+            // Create a new run.
+            runManager.createRun()
+            
+            // Update action button.
+            sender.backgroundColor = .start
+            sender.setTitle("START", for: .normal)
+            
+            // Reset and show header.
+            runView.headerView.durationLabel.text = "00:00:00.00"
+            runView.headerView.distanceLabel.text = "0.00 mi"
+            runView.headerView.paceLabel.text = "0:00 / mi"
+            runView.headerView.isCollapsed = false
+            runView.setHeaderViewHidden(false, animated: true)
+            
+            // Hide the tab bar.
+            tabBarController?.setTabBarHidden(true, animated: true)
+        }
+    }
+    
+    private func updateMapWithFinishedRun() {
+        
+        // Abort if there are less than 2 locations in the route.
+        guard let locations = runManager.currentRun?.route, locations.count >= 2 else { return }
+        
+        // Get coordinates and create route line.
+        let coordinates = locations.map({ $0.coordinate })
+        let routeLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        
+        // Set the visible region of the map to contain the route.
+        runView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
+                                          edgePadding: UIEdgeInsets(top: 25,
+                                                                    left: 25,
+                                                                    bottom: 25,
+                                                                    right: 25),
+                                          animated: false)
+        runView.mapView.add(routeLine)
+        
+        // Add the start point.
+        if let startCoordinate = coordinates.first {
+            let startAnnotation = MKPointAnnotation()
+            startAnnotation.coordinate = startCoordinate
+            startAnnotation.title = "Start"
+            runView.mapView.addAnnotation(startAnnotation)
         }
         
-        // Reset header.
-        runView.headerView.isCollapsed = state == .new
-        runView.setHeaderViewHidden(state == .new, animated: true)
-    
-        // Hide the tab bar.
-        if let tabBarController = tabBarController {
-            tabBarController.setTabBarHidden(state != .new, animated: true)
+        // Add the finish point.
+        if let finishCoordinate = coordinates.last {
+            let finishAnnotation = MKPointAnnotation()
+            finishAnnotation.coordinate = finishCoordinate
+            finishAnnotation.title = "Finish"
+            runView.mapView.addAnnotation(finishAnnotation)
         }
     }
 }
 
 extension RunViewController: MKMapViewDelegate {
     
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
-        // Follow user by default once map loads.
-        mapView.setUserTrackingMode(.follow, animated: true)
+        // TODO
+        // Handle multiple overlays.
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.lineWidth = 5
+        renderer.strokeColor = UIColor.black.withAlphaComponent(0.5)
+        return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        // TODO find more appropriate way to prevent overriding the user annotation.
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        var view = mapView.dequeueReusableAnnotationView(withIdentifier: "pin") as? MKMarkerAnnotationView
+        
+        if view == nil {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            
+            if annotation.title == "Start" {
+                view?.markerTintColor = .start
+            } else if annotation.title == "Finish" {
+                view?.markerTintColor = .finish
+            }
+        }
+        
+        return view
     }
 }
 

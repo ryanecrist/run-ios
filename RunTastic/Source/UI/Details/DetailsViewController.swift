@@ -20,7 +20,7 @@ class DetailsViewController: UIViewController {
     
     var lastUpdateTime = Date().timeIntervalSince1970
     
-    var locationBatch: [Location.Update] = []
+//    var locationBatch: [Location.Update] = []
     
     var startTimeMs: Int = 0
     
@@ -40,87 +40,87 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set title.
-        title = "Run \(runId)"
-        
-        // Setup map view.
-        detailsView.mapView.delegate = self
-        
-        // Setup buttons.
-        detailsView.startButton.addTarget(self, action: #selector(startRun), for: .touchUpInside)
-        detailsView.finishButton.addTarget(self, action: #selector(finishRun), for: .touchUpInside)
-        
-        // Setup location manager.
-        locationManager.delegate = self
-        
-        // Get run.
-        RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run2>) in
-            
-            if let run = response.value {
-            
-                // Get run start time.
-                if let startTime = run.startTime {
-                    self.detailsView.startTimeLabel.text = "\(startTime)"
-                } else {
-                    self.detailsView.startTimeLabel.text = "N/A"
-                    self.detailsView.startButton.isHidden = false
-                }
-                
-                // Get run end time.
-                if let endTime = run.endTime {
-                    self.detailsView.endTimeLabel.text = "\(endTime)"
-                } else {
-                    self.detailsView.endTimeLabel.text = "N/A"
-                    self.detailsView.finishButton.isHidden = !self.detailsView.startButton.isHidden
-                }
-                
-                // Get run distance.
-                if let distance = run.distance {
-                    self.detailsView.distanceLabel.text = "\(distance)"
-                } else {
-                    self.detailsView.distanceLabel.text = "N/A"
-                }
-                
-            } else {
-                // TODO run not found!
-            }
-        }
-        
-        // Get route.
-        RunTasticAPI.getRunRoute(with: runId).start() { (response: HTTPResponse<[Location]>) in
-            
-            if let locations = response.value, locations.count >= 2 {
-                
-                // Get coordinates and create route line.
-                let coordinates = locations.map({ $0.coordinate })
-                let routeLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
-                
-                // Set the visible region of the map to contain the route.
-                self.detailsView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
-                                                           edgePadding: UIEdgeInsets(top: 25,
-                                                                                     left: 25,
-                                                                                     bottom: 25,
-                                                                                     right: 25),
-                                                           animated: false)
-                self.detailsView.mapView.add(routeLine)
-                
-                // Add the start point.
-                if let startCoordinate = coordinates.first {
-                    let startAnnotation = MKPointAnnotation()
-                    startAnnotation.coordinate = startCoordinate
-                    startAnnotation.title = "Start"
-                    self.detailsView.mapView.addAnnotation(startAnnotation)
-                }
-                
-                // Add the finish point.
-                if let finishCoordinate = coordinates.last {
-                    let finishAnnotation = MKPointAnnotation()
-                    finishAnnotation.coordinate = finishCoordinate
-                    finishAnnotation.title = "Finish"
-                    self.detailsView.mapView.addAnnotation(finishAnnotation)
-                }
-            }
-        }
+//        // Set title.
+//        title = "Run \(runId)"
+//
+//        // Setup map view.
+//        detailsView.mapView.delegate = self
+//
+//        // Setup buttons.
+//        detailsView.startButton.addTarget(self, action: #selector(startRun), for: .touchUpInside)
+//        detailsView.finishButton.addTarget(self, action: #selector(finishRun), for: .touchUpInside)
+//
+//        // Setup location manager.
+//        locationManager.delegate = self
+//
+//        // Get run.
+//        RunTasticAPI.getRun(with: runId).start() { (response: HTTPResponse<Run2>) in
+//
+//            if let run = response.value {
+//
+//                // Get run start time.
+//                if let startTime = run.startTime {
+//                    self.detailsView.startTimeLabel.text = "\(startTime)"
+//                } else {
+//                    self.detailsView.startTimeLabel.text = "N/A"
+//                    self.detailsView.startButton.isHidden = false
+//                }
+//
+//                // Get run end time.
+//                if let endTime = run.endTime {
+//                    self.detailsView.endTimeLabel.text = "\(endTime)"
+//                } else {
+//                    self.detailsView.endTimeLabel.text = "N/A"
+//                    self.detailsView.finishButton.isHidden = !self.detailsView.startButton.isHidden
+//                }
+//
+//                // Get run distance.
+//                if let distance = run.distance {
+//                    self.detailsView.distanceLabel.text = "\(distance)"
+//                } else {
+//                    self.detailsView.distanceLabel.text = "N/A"
+//                }
+//
+//            } else {
+//                // TODO run not found!
+//            }
+//        }
+//
+//        // Get route.
+//        RunTasticAPI.getRunRoute(with: runId).start() { (response: HTTPResponse<[Location]>) in
+//
+//            if let locations = response.value, locations.count >= 2 {
+//
+//                // Get coordinates and create route line.
+//                let coordinates = locations.map({ $0.coordinate })
+//                let routeLine = MKPolyline(coordinates: coordinates, count: coordinates.count)
+//
+//                // Set the visible region of the map to contain the route.
+//                self.detailsView.mapView.setVisibleMapRect(routeLine.boundingMapRect,
+//                                                           edgePadding: UIEdgeInsets(top: 25,
+//                                                                                     left: 25,
+//                                                                                     bottom: 25,
+//                                                                                     right: 25),
+//                                                           animated: false)
+//                self.detailsView.mapView.add(routeLine)
+//
+//                // Add the start point.
+//                if let startCoordinate = coordinates.first {
+//                    let startAnnotation = MKPointAnnotation()
+//                    startAnnotation.coordinate = startCoordinate
+//                    startAnnotation.title = "Start"
+//                    self.detailsView.mapView.addAnnotation(startAnnotation)
+//                }
+//
+//                // Add the finish point.
+//                if let finishCoordinate = coordinates.last {
+//                    let finishAnnotation = MKPointAnnotation()
+//                    finishAnnotation.coordinate = finishCoordinate
+//                    finishAnnotation.title = "Finish"
+//                    self.detailsView.mapView.addAnnotation(finishAnnotation)
+//                }
+//            }
+//        }
     }
     
     @objc
@@ -152,19 +152,19 @@ class DetailsViewController: UIViewController {
         locationManager.stopUpdatingLocation()
         
         // Post any remaining locations.
-        RunTasticAPI.addRunLocations(with: runId,
-                                     locations: locationBatch)
-            .start() { (response: HTTPEmptyResponse) in
-                print("ADDED LOCATIONS!: \(response.result)")
-                
-                // Finish run.
-                RunTasticAPI.finishRun(with: self.runId,
-                                       endTime: Date.millisecondsSinceEpoch)
-                    .start() { (response: HTTPEmptyResponse) in
-                        print("RUN FINISHED!: \(response.result)")
-                    }
-            }
-        locationBatch.removeAll()
+//        RunTasticAPI.addRunLocations(with: runId,
+//                                     locations: locationBatch)
+//            .start() { (response: HTTPEmptyResponse) in
+//                print("ADDED LOCATIONS!: \(response.result)")
+//
+//                // Finish run.
+//                RunTasticAPI.finishRun(with: self.runId,
+//                                       finishTime: Date.millisecondsSinceEpoch)
+//                    .start() { (response: HTTPEmptyResponse) in
+//                        print("RUN FINISHED!: \(response.result)")
+//                    }
+//            }
+//        locationBatch.removeAll()
     }
 }
 
@@ -175,22 +175,22 @@ extension DetailsViewController: CLLocationManagerDelegate {
         let currentTime = Date().timeIntervalSince1970
         
         // Filter out any locations after the start timestamp.
-        locationBatch += locations.map({ Location.Update(latitude: $0.coordinate.latitude,
-                                                         longitude: $0.coordinate.longitude,
-                                                         elevation: $0.altitude,
-                                                         timestampMs: $0.timestamp.millisecondsSinceEpoch) })
-                                  .filter({ $0.timestampMs >= startTimeMs })
-        
-        // Only update locations every 10 seconds.
-        if (currentTime - lastUpdateTime) >= 10 {
-            RunTasticAPI.addRunLocations(with: runId,
-                                         locations: locationBatch)
-                .start() { (response: HTTPEmptyResponse) in
-                    print("ADDED LOCATIONS!: \(response.result)")
-                }
-            locationBatch.removeAll()
-            lastUpdateTime = currentTime
-        }
+//        locationBatch += locations.map({ Location.Update(latitude: $0.coordinate.latitude,
+//                                                         longitude: $0.coordinate.longitude,
+//                                                         elevation: $0.altitude,
+//                                                         timestampMs: $0.timestamp.millisecondsSinceEpoch) })
+//                                  .filter({ $0.timestampMs >= startTimeMs })
+//        
+//        // Only update locations every 10 seconds.
+//        if (currentTime - lastUpdateTime) >= 10 {
+//            RunTasticAPI.addRunLocations(with: runId,
+//                                         locations: locationBatch)
+//                .start() { (response: HTTPEmptyResponse) in
+//                    print("ADDED LOCATIONS!: \(response.result)")
+//                }
+//            locationBatch.removeAll()
+//            lastUpdateTime = currentTime
+//        }
         
         print("LOCATION UPDATE = \(locations)")
     }

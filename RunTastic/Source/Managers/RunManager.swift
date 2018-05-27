@@ -25,6 +25,8 @@ class RunManager: NSObject {
     
     private let _locationManager = CLLocationManager()
     
+    private var _runId: Int? = 0
+    
     private var _timer: Timer?
     
     // MARK: - Initializers
@@ -38,8 +40,21 @@ class RunManager: NSObject {
     
     // MARK: - Public Methods
     
+    func reset() {
+        currentRun = nil
+    }
+    
     @discardableResult
     func createRun() -> Run {
+        
+        // Make API call to create run.
+//        RunTasticAPI.createRun()
+//            .start() { (response: HTTPResponse<CreateRunDTO>) in
+//                print("RUN CREATED!: \(response.result)")
+//                self._runId = response.value?.id
+//            }
+        
+        // Create local run.
         let run = Run()
         currentRun = run
         return run
@@ -47,11 +62,22 @@ class RunManager: NSObject {
     
     func startRun() {
         
-        guard let currentRun = currentRun else { return }
+        // Abort if a run hasn't been created.
+        guard let currentRun = currentRun,
+              let runId = _runId
+        else { return }
         
         // Set run start time and state.
-        currentRun.start = Date()
+        let start = Date()
+        currentRun.start = start
         currentRun.state = .started
+        
+        // Make API call to start run.
+//        RunTasticAPI.startRun(with: runId,
+//                              startTime: start.millisecondsSinceEpoch)
+//            .start() { (response: HTTPEmptyResponse) in
+//                print("RUN STARTED!: \(response.result)")
+//            }
         
         // Start the location manager.
         _locationManager.startUpdatingLocation()
@@ -73,11 +99,22 @@ class RunManager: NSObject {
     
     func finishRun() {
         
-        guard let currentRun = currentRun else { return }
+        guard let currentRun = currentRun,
+              let runId = _runId
+        else { return }
         
         // Set run finish time and state.
-        currentRun.finish = Date()
+        let finish = Date()
+        currentRun.finish = finish
         currentRun.state = .finished
+        
+        // Make API call to start run.
+//        RunTasticAPI.finishRun(with: runId,
+//                               finishTime: finish.millisecondsSinceEpoch,
+//                               locations: currentRun.route.map({ Location($0) }))
+//            .start() { (response: HTTPEmptyResponse) in
+//                print("RUN STARTED!: \(response.result)")
+//            }
         
         // Stop the timer.
         _timer?.invalidate()

@@ -12,7 +12,6 @@ import Foundation
 enum RunState {
     case created
     case started
-    case paused
     case finished
 }
 
