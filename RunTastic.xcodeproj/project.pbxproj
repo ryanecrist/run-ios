@@ -12,6 +12,8 @@
 		9417600020A5232700A572D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94175FFE20A5232700A572D6 /* LaunchScreen.storyboard */; };
 		9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362320BA308E007E1D31 /* TrainingViewController.swift */; };
 		9472362720BA313D007E1D31 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362620BA313D007E1D31 /* SettingsViewController.swift */; };
+		9472362920BA3212007E1D31 /* RunTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362820BA3212007E1D31 /* RunTableViewCell.swift */; };
+		9472362B20BA3341007E1D31 /* UIView+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9472362A20BA3341007E1D31 /* UIView+RunTastic.swift */; };
 		948E823520AE666A003E7DEF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823420AE666A003E7DEF /* Configuration.swift */; };
 		948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */; };
 		948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */; };
@@ -45,6 +47,8 @@
 		9417600120A5232700A572D6 /* Info-Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Production.plist"; sourceTree = "<group>"; };
 		9472362320BA308E007E1D31 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		9472362620BA313D007E1D31 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9472362820BA3212007E1D31 /* RunTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTableViewCell.swift; sourceTree = "<group>"; };
+		9472362A20BA3341007E1D31 /* UIView+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RunTastic.swift"; sourceTree = "<group>"; };
 		948E823420AE666A003E7DEF /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		948E823620AE70AC003E7DEF /* Info-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+RunTastic.swift"; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		9472362220BA307E007E1D31 /* Training */ = {
 			isa = PBXGroup;
 			children = (
+				9472362820BA3212007E1D31 /* RunTableViewCell.swift */,
 				9472362320BA308E007E1D31 /* TrainingViewController.swift */,
 			);
 			path = Training;
@@ -225,6 +230,7 @@
 				94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */,
 				948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */,
 				948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */,
+				9472362A20BA3341007E1D31 /* UIView+RunTastic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9472362920BA3212007E1D31 /* RunTableViewCell.swift in Sources */,
 				94A9D82220A70DFE00D175C8 /* Run2.swift in Sources */,
 				94F81C5020B1AADB000A2E24 /* Run.swift in Sources */,
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
@@ -335,6 +342,7 @@
 				9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */,
 				94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */,
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
+				9472362B20BA3341007E1D31 /* UIView+RunTastic.swift in Sources */,
 				948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */,
 				948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */,
 				948E823520AE666A003E7DEF /* Configuration.swift in Sources */,
