@@ -21,6 +21,7 @@
 		94A29A3A20BC2E97005203CD /* FinishedRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A3920BC2E97005203CD /* FinishedRunViewController.swift */; };
 		94A29A3F20BC397F005203CD /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A3E20BC397F005203CD /* Formatter.swift */; };
 		94A29A4320BC4831005203CD /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4220BC4831005203CD /* MapManager.swift */; };
+		94A29A4920BC5219005203CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4420BC50FF005203CD /* SettingsView.swift */; };
 		94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */; };
 		94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80720A70CE100D175C8 /* HTTPClient.swift */; };
 		94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80820A70CE200D175C8 /* HTTPResult.swift */; };
@@ -28,12 +29,9 @@
 		94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80A20A70CE200D175C8 /* HTTPRequest.swift */; };
 		94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80B20A70CE200D175C8 /* HTTPClientConfiguration.swift */; };
 		94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80C20A70CE200D175C8 /* HTTPResponse.swift */; };
-		94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D81620A70D0F00D175C8 /* ListViewController.swift */; };
-		94A9D82220A70DFE00D175C8 /* Run2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82120A70DFE00D175C8 /* Run2.swift */; };
 		94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82420A7191400D175C8 /* RunTasticAPI.swift */; };
-		94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */; };
 		94A9D82A20A71DE000D175C8 /* FinishedRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82920A71DE000D175C8 /* FinishedRunView.swift */; };
-		94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */; };
+		94A9D82C20A7224F00D175C8 /* RunPropertyItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82B20A7224F00D175C8 /* RunPropertyItemView.swift */; };
 		94A9D82F20A74F2600D175C8 /* Date+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */; };
 		94A9D83120A78DB600D175C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83020A78DB600D175C8 /* Location.swift */; };
 		94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* RunViewController.swift */; };
@@ -60,6 +58,7 @@
 		94A29A3920BC2E97005203CD /* FinishedRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedRunViewController.swift; sourceTree = "<group>"; };
 		94A29A3E20BC397F005203CD /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		94A29A4220BC4831005203CD /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		94A29A4420BC50FF005203CD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestEncoders.swift; sourceTree = "<group>"; };
 		94A9D80720A70CE100D175C8 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		94A9D80820A70CE200D175C8 /* HTTPResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
@@ -67,12 +66,9 @@
 		94A9D80A20A70CE200D175C8 /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		94A9D80B20A70CE200D175C8 /* HTTPClientConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientConfiguration.swift; sourceTree = "<group>"; };
 		94A9D80C20A70CE200D175C8 /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
-		94A9D81620A70D0F00D175C8 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
-		94A9D82120A70DFE00D175C8 /* Run2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run2.swift; sourceTree = "<group>"; };
 		94A9D82420A7191400D175C8 /* RunTasticAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTasticAPI.swift; sourceTree = "<group>"; };
-		94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		94A9D82920A71DE000D175C8 /* FinishedRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedRunView.swift; sourceTree = "<group>"; };
-		94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsItemView.swift; sourceTree = "<group>"; };
+		94A9D82B20A7224F00D175C8 /* RunPropertyItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunPropertyItemView.swift; sourceTree = "<group>"; };
 		94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RunTastic.swift"; sourceTree = "<group>"; };
 		94A9D83020A78DB600D175C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		94A9D83F20AB880E00D175C8 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
@@ -121,10 +117,8 @@
 		9472362220BA307E007E1D31 /* Training */ = {
 			isa = PBXGroup;
 			children = (
-				9472362820BA3212007E1D31 /* RunTableViewCell.swift */,
-				9472362320BA308E007E1D31 /* TrainingViewController.swift */,
-				94A9D82920A71DE000D175C8 /* FinishedRunView.swift */,
-				94A29A3920BC2E97005203CD /* FinishedRunViewController.swift */,
+				94A29A4720BC51F2005203CD /* Finished Run */,
+				94A29A4620BC51EC005203CD /* List */,
 			);
 			path = Training;
 			sourceTree = "<group>";
@@ -132,6 +126,7 @@
 		9472362520BA312C007E1D31 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				94A29A4420BC50FF005203CD /* SettingsView.swift */,
 				9472362620BA313D007E1D31 /* SettingsViewController.swift */,
 			);
 			path = Settings;
@@ -143,6 +138,25 @@
 				94A29A3E20BC397F005203CD /* Formatter.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		94A29A4620BC51EC005203CD /* List */ = {
+			isa = PBXGroup;
+			children = (
+				94A9D82B20A7224F00D175C8 /* RunPropertyItemView.swift */,
+				94A9D82920A71DE000D175C8 /* FinishedRunView.swift */,
+				94A29A3920BC2E97005203CD /* FinishedRunViewController.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		94A29A4720BC51F2005203CD /* Finished Run */ = {
+			isa = PBXGroup;
+			children = (
+				9472362820BA3212007E1D31 /* RunTableViewCell.swift */,
+				9472362320BA308E007E1D31 /* TrainingViewController.swift */,
+			);
+			path = "Finished Run";
 			sourceTree = "<group>";
 		};
 		94A9D7F720A70C2000D175C8 /* Source */ = {
@@ -182,8 +196,6 @@
 		94A9D80420A70CBF00D175C8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				94A9D82620A71D9800D175C8 /* Details */,
-				94A9D81420A70CF400D175C8 /* List */,
 				94A9D83E20AB87D900D175C8 /* Run */,
 				9472362520BA312C007E1D31 /* Settings */,
 				9472362220BA307E007E1D31 /* Training */,
@@ -205,19 +217,10 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		94A9D81420A70CF400D175C8 /* List */ = {
-			isa = PBXGroup;
-			children = (
-				94A9D81620A70D0F00D175C8 /* ListViewController.swift */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
 		94A9D82020A70DEF00D175C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				94A9D83020A78DB600D175C8 /* Location.swift */,
-				94A9D82120A70DFE00D175C8 /* Run2.swift */,
 				94F81C4F20B1AADB000A2E24 /* Run.swift */,
 			);
 			path = Models;
@@ -229,15 +232,6 @@
 				94A9D82420A7191400D175C8 /* RunTasticAPI.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		94A9D82620A71D9800D175C8 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				94A9D82B20A7224F00D175C8 /* DetailsItemView.swift */,
-				94A9D82720A71DAB00D175C8 /* DetailsViewController.swift */,
-			);
-			path = Details;
 			sourceTree = "<group>";
 		};
 		94A9D82D20A74EFE00D175C8 /* Extensions */ = {
@@ -346,7 +340,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9472362920BA3212007E1D31 /* RunTableViewCell.swift in Sources */,
-				94A9D82220A70DFE00D175C8 /* Run2.swift in Sources */,
 				94F81C5020B1AADB000A2E24 /* Run.swift in Sources */,
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
 				94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */,
@@ -358,21 +351,20 @@
 				94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */,
 				9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */,
 				94A29A3F20BC397F005203CD /* Formatter.swift in Sources */,
-				94A9D82C20A7224F00D175C8 /* DetailsItemView.swift in Sources */,
+				94A9D82C20A7224F00D175C8 /* RunPropertyItemView.swift in Sources */,
 				94A29A4320BC4831005203CD /* MapManager.swift in Sources */,
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				9472362B20BA3341007E1D31 /* UIView+RunTastic.swift in Sources */,
 				948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */,
 				948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */,
+				94A29A4920BC5219005203CD /* SettingsView.swift in Sources */,
 				948E823520AE666A003E7DEF /* Configuration.swift in Sources */,
-				94A9D81720A70D0F00D175C8 /* ListViewController.swift in Sources */,
 				94A9D82F20A74F2600D175C8 /* Date+RunTastic.swift in Sources */,
 				94A9D83120A78DB600D175C8 /* Location.swift in Sources */,
 				94A9D81220A70CE200D175C8 /* HTTPClientConfiguration.swift in Sources */,
 				94A9D82A20A71DE000D175C8 /* FinishedRunView.swift in Sources */,
 				948E823D20B0749E003E7DEF /* UITabBarController+RunTastic.swift in Sources */,
 				94A29A3A20BC2E97005203CD /* FinishedRunViewController.swift in Sources */,
-				94A9D82820A71DAB00D175C8 /* DetailsViewController.swift in Sources */,
 				9472362720BA313D007E1D31 /* SettingsViewController.swift in Sources */,
 				94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */,
 				94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */,

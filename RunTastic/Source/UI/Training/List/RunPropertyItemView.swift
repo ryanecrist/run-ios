@@ -1,5 +1,5 @@
 //
-//  DetailsItemView.swift
+//  RunPropertyItemView.swift
 //  RunTastic
 //
 //  Created by Ryan Crist on 5/12/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsItemView: UIView {
+class RunPropertyItemView: UIView {
     
     // MARK: - Public Properties
     

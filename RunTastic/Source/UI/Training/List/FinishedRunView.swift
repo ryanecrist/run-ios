@@ -29,11 +29,11 @@ class FinishedRunView: UIView {
     
     // MARK: - Private Properties
     
-    private let startTimeItemView = DetailsItemView()
+    private let startTimeItemView = RunPropertyItemView()
     
-    private let endTimeItemView = DetailsItemView()
+    private let endTimeItemView = RunPropertyItemView()
     
-    private let distanceItemView = DetailsItemView()
+    private let distanceItemView = RunPropertyItemView()
     
     // MARK: - Initializers
     
