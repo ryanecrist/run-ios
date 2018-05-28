@@ -18,8 +18,18 @@ class PacePickerView: UIPickerView {
     // MARK: - Public Properties
     
     var selectedPace: TimeInterval {
-        return TimeInterval(selectedRow(inComponent: PacePickerComponents.minutes.rawValue) * 60 +
-                            selectedRow(inComponent: PacePickerComponents.seconds.rawValue))
+        get {
+            return TimeInterval(selectedRow(inComponent: PacePickerComponents.minutes.rawValue) * 60 +
+                                selectedRow(inComponent: PacePickerComponents.seconds.rawValue))
+        }
+        set {
+            
+            let paceMinutes = Int(newValue) / 60
+            let paceSeconds = Int(newValue) - (paceMinutes * 60)
+            
+            selectRow(paceMinutes, inComponent: PacePickerComponents.minutes.rawValue, animated: false)
+            selectRow(paceSeconds, inComponent: PacePickerComponents.seconds.rawValue, animated: false)
+        }
     }
     
     // MARK: - Initializers

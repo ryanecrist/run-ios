@@ -27,7 +27,9 @@ class Run {
     
     var distance: Double = 0
     
-    var pace: Double = 0
+    var pace: TimeInterval = 0
+    
+    var targetPace = UserDefaults.standard.targetPace
     
     var route: [CLLocation] = []
 }

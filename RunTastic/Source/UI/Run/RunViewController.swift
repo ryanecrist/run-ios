@@ -15,6 +15,12 @@ class RunViewController: UIViewController {
     
     let mapManager = MapManager()
     
+    lazy var pacePickerView: PacePickerView = {
+        let pacePickerView = PacePickerView()
+        pacePickerView.selectedPace = UserDefaults.standard.targetPace
+        return pacePickerView
+    }()
+    
     let runManager = RunManager()
     
     lazy var runView = RunView()
@@ -46,6 +52,7 @@ class RunViewController: UIViewController {
         
         // Setup run view.
         runView.actionButton.setTitle("NEW RUN", for: .normal)
+        runView.headerView.targetPaceTextView.text = Formatter.pace(UserDefaults.standard.targetPace)
         runView.mapView.showsUserLocation = true
         
         // Add action listener.
@@ -147,7 +154,7 @@ class RunViewController: UIViewController {
                                                      action: #selector(doneButtonPressed))
         
         // Show pace picker view.
-        runView.headerView.targetPaceTextView.inputView = PacePickerView()
+        runView.headerView.targetPaceTextView.inputView = pacePickerView
         runView.headerView.targetPaceTextView.inputAccessoryView = pacePickerAccessoryView
         runView.headerView.targetPaceTextView.becomeFirstResponder()
     }
@@ -155,11 +162,14 @@ class RunViewController: UIViewController {
     @objc
     func doneButtonPressed(_ sender: UIBarButtonItem) {
         
-        guard let pacePickerView =
-            runView.headerView.targetPaceTextView.inputView as? PacePickerView else { return }
+        // Abort if there is no current run.
+        guard let currentRun = runManager.currentRun else { return }
+        
+        // Update run target pace.
+        currentRun.targetPace = pacePickerView.selectedPace
         
         // Update header view with target pace.
-        runView.headerView.targetPaceTextView.text = Formatter.pace(pacePickerView.selectedPace)
+        runView.headerView.targetPaceTextView.text = Formatter.pace(currentRun.targetPace)
         
         // Hide pace picker view.
         runView.headerView.targetPaceTextView.resignFirstResponder()
@@ -174,6 +184,9 @@ extension RunViewController: RunManagerDelegate {
         runView.headerView.durationLabel.text = Formatter.duration(run.duration)
         runView.headerView.distanceLabel.text = Formatter.distance(run.distance)
         runView.headerView.paceLabel.text = Formatter.pace(run.pace)
+        
+        // Style pace label.
+        runView.headerView.paceLabel.textColor = run.pace <= run.targetPace ? .start : .finish
     }
 }
 
