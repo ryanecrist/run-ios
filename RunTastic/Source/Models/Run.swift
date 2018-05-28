@@ -1,57 +1,33 @@
 //
 //  Run.swift
-//  RacYa
+//  RunTastic
 //
-//  Created by Ryan Crist on 4/22/18.
+//  Created by Ryan Crist on 5/20/18.
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 
-struct Run: Decodable {
+enum RunState {
+    case created
+    case started
+    case finished
+}
+
+class Run {
     
-    let id: Int
+    var start: Date?
     
-    let startTimeMs: Int?
+    var finish: Date?
     
-    var startTime: Date? {
-        guard let startTimeMs = startTimeMs else { return nil }
-        return Date(millisecondsSinceEpoch: startTimeMs)
-    }
+    var state = RunState.created
     
-    let endTimeMs: Int?
+    var duration: TimeInterval = 0
     
-    var endTime: Date? {
-        guard let endTimeMs = endTimeMs else { return nil }
-        return Date(millisecondsSinceEpoch: endTimeMs)
-    }
+    var distance: Double = 0
     
-    let distance: Double?
+    var pace: Double = 0
     
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case startTimeMs = "startTime"
-        case endTimeMs = "endTime"
-        case distance = "distance"
-    }
-    
-    struct Create {
-        struct Request: Encodable {
-        }
-        struct Respnose: Decodable {
-            let id: Int
-        }
-    }
-    
-    struct Start {
-        struct Request: Encodable {
-            let timestamp: Int
-        }
-    }
-    
-    struct Finish {
-        struct Request: Encodable {
-            let timestamp: Int
-        }
-    }
+    var route: [CLLocation] = []
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 
 class RunTasticAPI {
@@ -37,37 +38,78 @@ class RunTasticAPI {
     
     static func startRun(with id: Int, startTime: Int) -> HTTPRequest {
         return client.request(method: .post,
-                                path: "runs/\(id)/start",
-                             headers: ["Authorization": "Bearer token",
-                                       "Content-Type": "application/json",
-                                       "ID": "Email someone@example.com"],
-                                with: HTTPRequestEncoders.json,
-                                data: Run.Start.Request(timestamp: startTime))
+                              path: "runs/\(id)/start",
+                              headers: ["Authorization": "Bearer token",
+                                        "Content-Type": "application/json",
+                                        "ID": "Email someone@example.com"],
+                              with: HTTPRequestEncoders.json,
+                              data: StartRunDTO(timestamp: startTime))
     }
     
-    static func finishRun(with id: Int, endTime: Int) -> HTTPRequest {
+    static func finishRun(with id: Int, finishTime: Int, locations: [CLLocation]?) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/finish",
-                           headers: ["Authorization": "Bearer token",
-                                     "Content-Type": "application/json",
-                                     "ID": "Email someone@example.com"],
+                              headers: ["Authorization": "Bearer token",
+                                        "Content-Type": "application/json",
+                                        "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: Run.Finish.Request(timestamp: endTime))
+                              data: FinishRunDTO(timestamp: finishTime,
+                                                 locations: locations?.map({ LocationDTO($0) })))
     }
     
     static func getRunRoute(with id: Int) -> HTTPRequest {
         return client.request(path: "runs/\(id)/route",
-                          headers: ["Authorization": "Bearer token",
-                                    "ID": "Email someone@example.com"])
+                              headers: ["Authorization": "Bearer token",
+                                        "ID": "Email someone@example.com"])
     }
     
-    static func addRunLocations(with id: Int, locations: [Location.Update]) -> HTTPRequest {
+    static func updateRun(with id: Int, locations: [CLLocation]) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/geoPoints",
-                          headers: ["Authorization": "Bearer token",
-                                    "Content-Type": "application/json",
-                                    "ID": "Email someone@example.com"],
+                              headers: ["Authorization": "Bearer token",
+                                        "Content-Type": "application/json",
+                                        "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: locations)
+                              data: locations.map({ LocationDTO($0) }))
     }
 }
+
+struct CreateRunDTO: Codable {
+    let id: Int
+}
+
+struct StartRunDTO: Codable {
+    let timestamp: Int
+}
+
+struct FinishRunDTO: Codable {
+    let timestamp: Int
+    let locations: [LocationDTO]?
+}
+
+struct RunDTO: Codable {
+    let id: Int
+    let startTime: Int?
+    let endTime: Int?
+    let distance: Double?
+}
+
+struct LocationDTO: Codable {
+    
+    let latitude: Double
+    let longitude: Double
+    let elevation: Double?
+    let timestamp: Int
+    
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    init(_ location: CLLocation) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.elevation = location.altitude
+        self.timestamp = location.timestamp.millisecondsSinceEpoch
+    }
+}
+
