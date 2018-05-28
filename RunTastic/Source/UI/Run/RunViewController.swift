@@ -11,11 +11,15 @@ import UIKit
 
 class RunViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
     let mapManager = MapManager()
     
     let runManager = RunManager()
     
     lazy var runView = RunView()
+    
+    // MARK: - Initializers
     
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -24,6 +28,8 @@ class RunViewController: UIViewController {
         title = "Run"
         tabBarItem = UITabBarItem(title: title, image: #imageLiteral(resourceName: "Run"), selectedImage: #imageLiteral(resourceName: "Run"))
     }
+    
+    // MARK: - View Lifecycle
 
     override func loadView() {
         view = runView
@@ -44,6 +50,7 @@ class RunViewController: UIViewController {
         
         // Add action listener.
         runView.actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        runView.headerView.targetPaceButton.addTarget(self, action: #selector(targetPaceButtonPressed), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +59,8 @@ class RunViewController: UIViewController {
         // Track user by default.
         runView.mapView.setUserTrackingMode(.follow, animated: true)
     }
+    
+    // MARK: - Action Handlers
     
     @objc
     func actionButtonPressed(_ sender: UIButton) {
@@ -127,6 +136,33 @@ class RunViewController: UIViewController {
             // Hide the tab bar.
             tabBarController?.setTabBarHidden(true, animated: true)
         }
+    }
+    
+    @objc
+    func targetPaceButtonPressed(_ sender: UIButton) {
+        
+        // Setup pace picker accessory view.
+        let pacePickerAccessoryView = PacePickerAccessoryView()
+        pacePickerAccessoryView.doneButton.addTarget(target: self,
+                                                     action: #selector(doneButtonPressed))
+        
+        // Show pace picker view.
+        runView.headerView.targetPaceTextView.inputView = PacePickerView()
+        runView.headerView.targetPaceTextView.inputAccessoryView = pacePickerAccessoryView
+        runView.headerView.targetPaceTextView.becomeFirstResponder()
+    }
+    
+    @objc
+    func doneButtonPressed(_ sender: UIBarButtonItem) {
+        
+        guard let pacePickerView =
+            runView.headerView.targetPaceTextView.inputView as? PacePickerView else { return }
+        
+        // Update header view with target pace.
+        runView.headerView.targetPaceTextView.text = Formatter.pace(pacePickerView.selectedPace)
+        
+        // Hide pace picker view.
+        runView.headerView.targetPaceTextView.resignFirstResponder()
     }
 }
 

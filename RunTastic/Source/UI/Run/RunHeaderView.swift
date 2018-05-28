@@ -32,6 +32,10 @@ class RunHeaderView: UIView {
     
     let paceLabel = UILabel()
     
+    let targetPaceButton = UIButton()
+    
+    let targetPaceTextView = UITextView()
+    
     // MARK: - Private Properties
     
     private var _isCollapsed = true
@@ -61,34 +65,55 @@ class RunHeaderView: UIView {
         durationLabel.textColor = .white
         
         // Setup distance label.
+        distanceLabel.alpha = 0
         distanceLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
+        distanceLabel.isHidden = true
         distanceLabel.text = "0.00 mi"
         distanceLabel.textColor = .white
         
         // Setup pace label.
         paceLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
         paceLabel.text = "0:00 / mi"
+        paceLabel.textAlignment = .right
         paceLabel.textColor = .white
         
+        // Setup target pace button.
+        targetPaceButton.setImage(#imageLiteral(resourceName: "Edit"), for: .normal)
+        targetPaceButton.tintColor = .secondary
+        
+        // Setup target pace text view.
+        targetPaceTextView.backgroundColor = .clear
+        targetPaceTextView.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
+        targetPaceTextView.isEditable = false
+        targetPaceTextView.isScrollEnabled = false
+        targetPaceTextView.isSelectable = false
+        targetPaceTextView.isUserInteractionEnabled = false
+        targetPaceTextView.text = "0:00 / mi"
+        targetPaceTextView.textColor = UIColor.white.withAlphaComponent(0.5)
+        
         // Setup timer image view.
-        let timerImage = #imageLiteral(resourceName: "Timer")
-        let timerImageView = UIImageView(image: timerImage)
+        let timerImageView = UIImageView(image: #imageLiteral(resourceName: "Timer"))
         timerImageView.tintColor = .white
         
-        let topStackView = UIStackView(arrangedSubviews: [timerImageView, durationLabel])
+        // Setup spacer views.
+        let topSpacerView = UIView()
+        let bottomSpacerView = UIView()
+        
+        // Setup top stack view.
+        let topStackView = UIStackView(arrangedSubviews: [timerImageView, durationLabel, topSpacerView])
         topStackView.alignment = .center
         topStackView.alpha = 0
         topStackView.isHidden = true
-        topStackView.isLayoutMarginsRelativeArrangement = true
-        topStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: timerImage.size.width + topStackView.spacing)
         topStackView.spacing = 10
         
         // Setup bottom stack view.
-        let bottomStackView = UIStackView(arrangedSubviews: [distanceLabel, paceLabel])
+        let bottomStackView = UIStackView(arrangedSubviews: [bottomSpacerView, paceLabel, targetPaceTextView, targetPaceButton])
+        bottomStackView.alignment = .center
         bottomStackView.alpha = 0
         bottomStackView.isHidden = true
         bottomStackView.spacing = 10
         
+        // Setup stack view.
         _stackView.alignment = .center
         _stackView.axis = .vertical
         _stackView.distribution = .fill
@@ -96,18 +121,38 @@ class RunHeaderView: UIView {
         _stackView.spacing = 5
         _stackView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Add subviews.
         _stackView.addArrangedSubview(topStackView)
+        _stackView.addArrangedSubview(distanceLabel)
         _stackView.addArrangedSubview(bottomStackView)
         addSubview(_stackView)
         
+        // Add constraints.
         NSLayoutConstraint.activate([
+            
+            // Constrain stack view.
             _stackView.leftAnchor.constraint(equalTo: leftAnchor),
             _stackView.topAnchor.constraint(equalTo: topAnchor),
             _stackView.rightAnchor.constraint(equalTo: rightAnchor),
             _stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             _stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 20),
+            
+            // Constrain timer image view.
             timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor),
+            
+            // Constrain target pace button.
+            targetPaceButton.heightAnchor.constraint(equalTo: targetPaceButton.widthAnchor),
+            
+            // Constrain target pace text view.
+            targetPaceTextView.widthAnchor.constraint(equalTo: paceLabel.widthAnchor),
+            
+            // Constrain spacer views.
+            topSpacerView.widthAnchor.constraint(equalTo: timerImageView.widthAnchor),
+            bottomSpacerView.widthAnchor.constraint(equalTo: targetPaceButton.widthAnchor),
         ])
+        
+        // Constrain target pace text view.
+        targetPaceTextView.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -43,10 +43,9 @@ class Formatter {
     }
     
     static func pace(_ pace: TimeInterval) -> String {
-        
-        let secondsPerMile = pace > 0 ? (1 / pace) * (1 / 0.000621371192) : 0
-        let paceMinutes = Int(secondsPerMile) / 60
-        let paceSeconds = Int(secondsPerMile) - (paceMinutes * 60)
+
+        let paceMinutes = Int(pace) / 60
+        let paceSeconds = Int(pace) - (paceMinutes * 60)
         
         return String(format: "%d:%02d / mi", paceMinutes, paceSeconds)
     }

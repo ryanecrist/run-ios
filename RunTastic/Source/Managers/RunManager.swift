@@ -197,7 +197,7 @@ extension RunManager: CLLocationManagerDelegate {
         }
         
         // Update run metrics.
-        currentRun.pace = lastLocation.speed
+        currentRun.pace = lastLocation.speed > 0 ? (1 / lastLocation.speed) * (1 / 0.000621371192) : 0
         currentRun.distance += distance
         currentRun.route += locations
         

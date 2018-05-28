@@ -22,6 +22,9 @@
 		94A29A3F20BC397F005203CD /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A3E20BC397F005203CD /* Formatter.swift */; };
 		94A29A4320BC4831005203CD /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4220BC4831005203CD /* MapManager.swift */; };
 		94A29A4920BC5219005203CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4420BC50FF005203CD /* SettingsView.swift */; };
+		94A29A4B20BC8712005203CD /* PacePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4A20BC8712005203CD /* PacePickerView.swift */; };
+		94A29A4D20BC8893005203CD /* PacePickerAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */; };
+		94A29A4F20BC899F005203CD /* UIBarButtonItem+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */; };
 		94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */; };
 		94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80720A70CE100D175C8 /* HTTPClient.swift */; };
 		94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80820A70CE200D175C8 /* HTTPResult.swift */; };
@@ -59,6 +62,9 @@
 		94A29A3E20BC397F005203CD /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		94A29A4220BC4831005203CD /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		94A29A4420BC50FF005203CD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		94A29A4A20BC8712005203CD /* PacePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacePickerView.swift; sourceTree = "<group>"; };
+		94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacePickerAccessoryView.swift; sourceTree = "<group>"; };
+		94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+RunTastic.swift"; sourceTree = "<group>"; };
 		94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestEncoders.swift; sourceTree = "<group>"; };
 		94A9D80720A70CE100D175C8 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		94A9D80820A70CE200D175C8 /* HTTPResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
@@ -238,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */,
+				94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */,
 				948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */,
 				948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */,
 				9472362A20BA3341007E1D31 /* UIView+RunTastic.swift */,
@@ -248,6 +255,8 @@
 		94A9D83E20AB87D900D175C8 /* Run */ = {
 			isa = PBXGroup;
 			children = (
+				94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */,
+				94A29A4A20BC8712005203CD /* PacePickerView.swift */,
 				948E823E20B0A942003E7DEF /* RunHeaderView.swift */,
 				94A9D84020AB880E00D175C8 /* RunView.swift */,
 				94A9D83F20AB880E00D175C8 /* RunViewController.swift */,
@@ -339,11 +348,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A29A4F20BC899F005203CD /* UIBarButtonItem+RunTastic.swift in Sources */,
 				9472362920BA3212007E1D31 /* RunTableViewCell.swift in Sources */,
 				94F81C5020B1AADB000A2E24 /* Run.swift in Sources */,
+				94A29A4D20BC8893005203CD /* PacePickerAccessoryView.swift in Sources */,
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
 				94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */,
 				94A9D81020A70CE200D175C8 /* HTTPRespnoseDecoders.swift in Sources */,
+				94A29A4B20BC8712005203CD /* PacePickerView.swift in Sources */,
 				94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */,
 				94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */,
 				94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */,
