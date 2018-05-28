@@ -12,7 +12,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    lazy var detailsView = DetailsView()
+    lazy var detailsView = FinishedRunView()
     
     let locationManager = (UIApplication.shared.delegate as! AppDelegate).locationManager
     
@@ -127,8 +127,8 @@ class DetailsViewController: UIViewController {
     func startRun(_ sender: UIButton) {
         
         // Update buttons.
-        detailsView.startButton.isHidden = true
-        detailsView.finishButton.isHidden = false
+//        detailsView.startButton.isHidden = true
+//        detailsView.finishButton.isHidden = false
         
         // Start run.
         startTimeMs = Date.millisecondsSinceEpoch
@@ -146,7 +146,7 @@ class DetailsViewController: UIViewController {
     func finishRun(_ sender: UIButton) {
         
         // Update buttons.
-        detailsView.finishButton.isHidden = true
+//        detailsView.finishButton.isHidden = true
         
         // Stop location manager.
         locationManager.stopUpdatingLocation()

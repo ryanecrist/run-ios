@@ -35,7 +35,7 @@ class RunManager: NSObject {
     private var _routeLocationUpdate = [CLLocation]()
     
     /// The ID of the current run.
-    private var _runId: String?
+    private var _runId: Int?
     
     /// TODO is this necessary?
     private var _timer: Timer?

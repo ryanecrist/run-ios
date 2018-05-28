@@ -1,5 +1,5 @@
 //
-//  DetailsView.swift
+//  FinishedRunView.swift
 //  RunTastic
 //
 //  Created by Ryan Crist on 5/12/18.
@@ -9,7 +9,7 @@
 import MapKit
 import UIKit
 
-class DetailsView: UIView {
+class FinishedRunView: UIView {
     
     // MARK: - Public Properties
     
@@ -26,10 +26,6 @@ class DetailsView: UIView {
     }
     
     let mapView = MKMapView()
-    
-    let startButton = UIButton()
-    
-    let finishButton = UIButton()
     
     // MARK: - Private Properties
     
@@ -55,9 +51,7 @@ class DetailsView: UIView {
         let contentStackView = UIStackView(arrangedSubviews: [startTimeItemView,
                                                               endTimeItemView,
                                                               distanceItemView,
-                                                              mapView,
-                                                              startButton,
-                                                              finishButton])
+                                                              mapView])
         contentStackView.axis = .vertical
         contentStackView.isLayoutMarginsRelativeArrangement = true
         contentStackView.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
@@ -74,16 +68,6 @@ class DetailsView: UIView {
         // Setup distance item view.
         distanceItemView.titleLabel.text = "Distance:"
         
-        // Setup start button.
-        startButton.backgroundColor = #colorLiteral(red: 0.1803921569, green: 0.8, blue: 0.4431372549, alpha: 1)
-        startButton.isHidden = true
-        startButton.setTitle("START", for: .normal)
-        
-        // Setup finish button.
-        finishButton.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.2980392157, blue: 0.2352941176, alpha: 1)
-        finishButton.isHidden = true
-        finishButton.setTitle("FINISH", for: .normal)
-        
         // Add subviews.
         addSubview(contentStackView)
         
@@ -95,10 +79,6 @@ class DetailsView: UIView {
             contentStackView.topAnchor.constraint(equalTo: topAnchor),
             contentStackView.rightAnchor.constraint(equalTo: rightAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-        
-            // Constrain buttons.
-            startButton.heightAnchor.constraint(equalToConstant: 50),
-            finishButton.heightAnchor.constraint(equalTo: startButton.heightAnchor),
         ])
     }
     

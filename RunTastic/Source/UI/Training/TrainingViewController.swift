@@ -103,8 +103,8 @@ class TrainingViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let run = runs[indexPath.row]
-//        let detailsViewController = DetailsViewController(runId: run.id)
-//        navigationController?.pushViewController(detailsViewController, animated: true)
+        let run = runs[indexPath.row]
+        let finishedRunViewController = FinishedRunViewController(run: run)
+        navigationController?.pushViewController(finishedRunViewController, animated: true)
     }
 }

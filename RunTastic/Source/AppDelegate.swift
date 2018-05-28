@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = .primary
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().isTranslucent = false
         
         // Setup location manager.
