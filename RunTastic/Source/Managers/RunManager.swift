@@ -17,16 +17,27 @@ class RunManager: NSObject {
     
     // MARK: - Public Properties
     
+    /// The current run, if it exists.
     private(set) var currentRun: Run? = nil
     
+    /// The run manager delegate.
     weak var delegate: RunManagerDelegate?
     
     // MARK: - Private Properties
     
+    /// The location manager used to receive phone location updates.
     private let _locationManager = CLLocationManager()
     
-    private var _runId: Int? = 0
+    /// The last time the route was updated on the backend for the current run.
+    private var _previousRouteUpdateTime = Date()
     
+    /// The current batch of location updates to be sent to the backend for the current run.
+    private var _routeLocationUpdate = [CLLocation]()
+    
+    /// The ID of the current run.
+    private var _runId: String?
+    
+    /// TODO is this necessary?
     private var _timer: Timer?
     
     // MARK: - Initializers
@@ -42,17 +53,18 @@ class RunManager: NSObject {
     
     func reset() {
         currentRun = nil
+        _runId = nil
     }
     
     @discardableResult
     func createRun() -> Run {
         
         // Make API call to create run.
-//        RunTasticAPI.createRun()
-//            .start() { (response: HTTPResponse<CreateRunDTO>) in
-//                print("RUN CREATED!: \(response.result)")
-//                self._runId = response.value?.id
-//            }
+        RunTasticAPI.createRun()
+            .start() { (response: HTTPResponse<CreateRunDTO>) in
+                print("RUN CREATED!: \(response.result)")
+                self._runId = response.value?.id
+            }
         
         // Create local run.
         let run = Run()
@@ -73,11 +85,11 @@ class RunManager: NSObject {
         currentRun.state = .started
         
         // Make API call to start run.
-//        RunTasticAPI.startRun(with: runId,
-//                              startTime: start.millisecondsSinceEpoch)
-//            .start() { (response: HTTPEmptyResponse) in
-//                print("RUN STARTED!: \(response.result)")
-//            }
+        RunTasticAPI.startRun(with: runId,
+                              startTime: start.millisecondsSinceEpoch)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN STARTED!: \(response.result)")
+            }
         
         // Start the location manager.
         _locationManager.startUpdatingLocation()
@@ -109,12 +121,12 @@ class RunManager: NSObject {
         currentRun.state = .finished
         
         // Make API call to start run.
-//        RunTasticAPI.finishRun(with: runId,
-//                               finishTime: finish.millisecondsSinceEpoch,
-//                               locations: currentRun.route.map({ Location($0) }))
-//            .start() { (response: HTTPEmptyResponse) in
-//                print("RUN STARTED!: \(response.result)")
-//            }
+        RunTasticAPI.finishRun(with: runId,
+                               finishTime: finish.millisecondsSinceEpoch,
+                               locations: currentRun.route)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN STARTED!: \(response.result)")
+            }
         
         // Stop the timer.
         _timer?.invalidate()
@@ -134,6 +146,29 @@ class RunManager: NSObject {
         
         return distance
     }
+    
+    func updateRemoteRun(with locations: [CLLocation]) {
+        
+        // Abort if there is no run in progress.
+        guard let runId = _runId,
+              currentRun?.state == .started
+        else { return }
+        
+        // Append new locations.
+        _routeLocationUpdate += locations
+        
+        let currentTime = Date()
+        
+        // Only update the route on the backend periodically.
+        if currentTime.timeIntervalSince(_previousRouteUpdateTime) >= 10 {
+            RunTasticAPI.updateRun(with: runId, locations: _routeLocationUpdate)
+                .start() { (response: HTTPEmptyResponse) in
+                    print("RUN UPDATED!: \(response.result)")
+                }
+            _routeLocationUpdate.removeAll()
+            _previousRouteUpdateTime = currentTime
+        }
+    }
 }
 
 extension RunManager: CLLocationManagerDelegate {
@@ -141,22 +176,32 @@ extension RunManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // Abort if no run is in progress.
-        guard let currentRun = currentRun else { return }
+        guard let currentRun = currentRun,
+              let currentRunStartTime = currentRun.start
+        else { return }
+        
+        // Filter out locations that occurred before the run was officially started.
+        let filteredLocations = locations.filter({ $0.timestamp > currentRunStartTime })
+        
+        // Abort if there isn't at least one location left.
+        guard let firstLocation = filteredLocations.first,
+              let lastLocation = filteredLocations.last
+        else { return }
         
         // Get the distance of the locations.
-        var distance = sumLocations(locations)
+        var distance = sumLocations(filteredLocations)
         
-        // If there was a previous location.
-        if let lastLocation = currentRun.route.last {
-            
-            // TODO
-            // This method is guaranteed to have at least one object
-            distance += locations.first!.distance(from: lastLocation)
+        // Add the distance to the previous location, if necessary.
+        if let previousLocation = currentRun.route.last {
+            distance += firstLocation.distance(from: previousLocation)
         }
         
         // Update run metrics.
-        currentRun.pace = locations.last!.speed
+        currentRun.pace = lastLocation.speed
         currentRun.distance += distance
         currentRun.route += locations
+        
+        // Update the remote run.
+        updateRemoteRun(with: filteredLocations)
     }
 }

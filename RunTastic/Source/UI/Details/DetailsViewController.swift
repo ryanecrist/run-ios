@@ -132,11 +132,11 @@ class DetailsViewController: UIViewController {
         
         // Start run.
         startTimeMs = Date.millisecondsSinceEpoch
-        RunTasticAPI.startRun(with: runId,
-                              startTime: startTimeMs)
-            .start() { (response: HTTPEmptyResponse) in
-                print("RUN STARTED!: \(response.result)")
-            }
+//        RunTasticAPI.startRun(with: runId,
+//                              startTime: startTimeMs)
+//            .start() { (response: HTTPEmptyResponse) in
+//                print("RUN STARTED!: \(response.result)")
+//            }
         
         // Start location manager.
         locationManager.startUpdatingLocation()

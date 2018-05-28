@@ -6,6 +6,7 @@
 //  Copyright © 2018 Shrubtactic. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 
 class RunTasticAPI {
@@ -29,13 +30,13 @@ class RunTasticAPI {
                                         "ID": "Email someone@example.com"])
     }
     
-    static func getRun(with id: Int) -> HTTPRequest {
+    static func getRun(with id: String) -> HTTPRequest {
         return client.request(path: "runs/\(id)",
                               headers: ["Authorization": "Bearer token",
                                         "ID": "Email someone@example.com"])
     }
     
-    static func startRun(with id: Int, startTime: Int) -> HTTPRequest {
+    static func startRun(with id: String, startTime: Int) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/start",
                               headers: ["Authorization": "Bearer token",
@@ -45,7 +46,7 @@ class RunTasticAPI {
                               data: StartRunDTO(timestamp: startTime))
     }
     
-    static func finishRun(with id: Int, finishTime: Int, locations: [Location]?) -> HTTPRequest {
+    static func finishRun(with id: String, finishTime: Int, locations: [CLLocation]?) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/finish",
                               headers: ["Authorization": "Bearer token",
@@ -56,13 +57,13 @@ class RunTasticAPI {
                                                  locations: locations?.map({ LocationDTO($0) })))
     }
     
-    static func getRunRoute(with id: Int) -> HTTPRequest {
+    static func getRunRoute(with id: String) -> HTTPRequest {
         return client.request(path: "runs/\(id)/route",
                               headers: ["Authorization": "Bearer token",
                                         "ID": "Email someone@example.com"])
     }
     
-    static func addRunLocations(with id: Int, locations: [Location]) -> HTTPRequest {
+    static func updateRun(with id: String, locations: [CLLocation]) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/\(id)/geoPoints",
                               headers: ["Authorization": "Bearer token",
@@ -74,7 +75,7 @@ class RunTasticAPI {
 }
 
 struct CreateRunDTO: Codable {
-    let id: Int
+    let id: String
 }
 
 struct StartRunDTO: Codable {
@@ -86,6 +87,13 @@ struct FinishRunDTO: Codable {
     let locations: [LocationDTO]?
 }
 
+struct RunDTO: Codable {
+    let id: Int
+    let startTime: Int?
+    let endTime: Int?
+    let distance: Double?
+}
+
 struct LocationDTO: Codable {
     
     let latitude: Double
@@ -93,10 +101,10 @@ struct LocationDTO: Codable {
     let elevation: Double?
     let timestamp: Int
     
-    init(_ location: Location) {
-        self.latitude = location.latitude
-        self.longitude = location.longitude
-        self.elevation = location.elevation
+    init(_ location: CLLocation) {
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        self.elevation = location.altitude
         self.timestamp = location.timestamp.millisecondsSinceEpoch
     }
 }
