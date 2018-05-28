@@ -14,34 +14,15 @@ class RunHeaderView: UIView {
         return true
     }
     
-    var isCollapsed = true {
-        didSet {
-
-            let alpha: CGFloat = isCollapsed ? 0 : 1
-            let alphaAnimations = {
-                self.stackView.arrangedSubviews.forEach {
-                    $0.alpha = alpha
-                }
-            }
-
-            let hidden = isCollapsed
-            let a = !isCollapsed
-            let hiddenAnimations = {
-                self.stackView.arrangedSubviews.forEach {
-                    $0.isHidden = hidden
-                }
-                self.stackView.isLayoutMarginsRelativeArrangement = a
-            }
-
-            if isCollapsed {
-                UIView.animate(withDuration: 0.25, animations: alphaAnimations) { _ in
-                    UIView.animate(withDuration: 0.25, animations: hiddenAnimations)
-                }
-            } else {
-                UIView.animate(withDuration: 0.25, animations: hiddenAnimations) { _ in
-                    UIView.animate(withDuration: 0.25, animations: alphaAnimations)
-                }
-            }
+    // MARK: - Public Properties
+    
+    var isCollapsed: Bool {
+        get {
+            return _isCollapsed
+        }
+        set {
+            _isCollapsed = newValue
+            setCollapsed(newValue, animated: false)
         }
     }
     
@@ -51,7 +32,13 @@ class RunHeaderView: UIView {
     
     let paceLabel = UILabel()
     
-    private let stackView = UIStackView()
+    // MARK: - Private Properties
+    
+    private var _isCollapsed = true
+    
+    private let _stackView = UIStackView()
+    
+    // MARK: - Initializers
     
     convenience init() {
         self.init(frame: .zero)
@@ -102,28 +89,65 @@ class RunHeaderView: UIView {
         bottomStackView.isHidden = true
         bottomStackView.spacing = 10
         
-        stackView.alignment = .center
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        stackView.spacing = 5
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        _stackView.alignment = .center
+        _stackView.axis = .vertical
+        _stackView.distribution = .fill
+        _stackView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        _stackView.spacing = 5
+        _stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        stackView.addArrangedSubview(topStackView)
-        stackView.addArrangedSubview(bottomStackView)
-        addSubview(stackView)
+        _stackView.addArrangedSubview(topStackView)
+        _stackView.addArrangedSubview(bottomStackView)
+        addSubview(_stackView)
         
         NSLayoutConstraint.activate([
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            _stackView.leftAnchor.constraint(equalTo: leftAnchor),
+            _stackView.topAnchor.constraint(equalTo: topAnchor),
+            _stackView.rightAnchor.constraint(equalTo: rightAnchor),
+            _stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            _stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 20),
             timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor),
-            heightAnchor.constraint(greaterThanOrEqualToConstant: 20), // TODO this may be more appropriate to set on the container view.
         ])
     }
     
     required init?(coder aDecoder: NSCoder) {
         return nil
+    }
+    
+    // MARK: - Public Methods
+    
+    func setCollapsed(_ collapsed: Bool, animated: Bool) {
+        
+        // Setup duration.
+        let duration: TimeInterval = animated ? 0.25 : 0
+        
+        // Setup alpha animations block.
+        let alpha: CGFloat = collapsed ? 0 : 1
+        let alphaAnimations = {
+            self._stackView.arrangedSubviews.forEach {
+                $0.alpha = alpha
+            }
+        }
+        
+        // Setup layout animations block.
+        let hidden = collapsed
+        let layoutMarginsEnabled = !collapsed
+        let layoutAnimations = {
+            self._stackView.arrangedSubviews.forEach {
+                $0.isHidden = hidden
+            }
+            self._stackView.isLayoutMarginsRelativeArrangement = layoutMarginsEnabled
+        }
+        
+        // Animate the changes.
+        if collapsed {
+            UIView.animate(withDuration: duration, animations: alphaAnimations) { _ in
+                UIView.animate(withDuration: duration, animations: layoutAnimations)
+            }
+        } else {
+            UIView.animate(withDuration: duration, animations: layoutAnimations) { _ in
+                UIView.animate(withDuration: duration, animations: alphaAnimations)
+            }
+        }
     }
 }

@@ -197,8 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				94A9D83E20AB87D900D175C8 /* Run */,
-				9472362520BA312C007E1D31 /* Settings */,
 				9472362220BA307E007E1D31 /* Training */,
+				9472362520BA312C007E1D31 /* Settings */,
 			);
 			path = UI;
 			sourceTree = "<group>";

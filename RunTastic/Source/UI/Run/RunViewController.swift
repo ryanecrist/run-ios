@@ -103,8 +103,7 @@ class RunViewController: UIViewController {
                 sender.setTitle("NEW RUN", for: .normal)
                 
                 // Hide header.
-                runView.headerView.isCollapsed = true
-                runView.setHeaderViewHidden(true, animated: true)
+                runView.headerView.setCollapsed(true, animated: true)
                 
                 // Hide the tab bar.
                 tabBarController?.setTabBarHidden(false, animated: true)
@@ -123,8 +122,7 @@ class RunViewController: UIViewController {
             runView.headerView.durationLabel.text = "00:00:00.00"
             runView.headerView.distanceLabel.text = "0.00 mi"
             runView.headerView.paceLabel.text = "0:00 / mi"
-            runView.headerView.isCollapsed = false
-            runView.setHeaderViewHidden(false, animated: true)
+            runView.headerView.setCollapsed(false, animated: true)
             
             // Hide the tab bar.
             tabBarController?.setTabBarHidden(true, animated: true)
