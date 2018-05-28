@@ -123,7 +123,7 @@ class RunManager: NSObject {
         // Make API call to start run.
         RunTasticAPI.finishRun(with: runId,
                                finishTime: finish.millisecondsSinceEpoch,
-                               locations: currentRun.route)
+                               locations: _routeLocationUpdate)
             .start() { (response: HTTPEmptyResponse) in
                 print("RUN STARTED!: \(response.result)")
             }
