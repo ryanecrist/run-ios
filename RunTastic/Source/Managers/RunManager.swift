@@ -25,6 +25,9 @@ class RunManager: NSObject {
     
     // MARK: - Private Properties
     
+    /// The coach in your head.
+    private let _coach = Coach()
+    
     /// The location manager used to receive phone location updates.
     private let _locationManager = CLLocationManager()
     
@@ -59,13 +62,6 @@ class RunManager: NSObject {
     @discardableResult
     func createRun() -> Run {
         
-        // Make API call to create run.
-        RunTasticAPI.createRun()
-            .start() { (response: HTTPResponse<CreateRunDTO>) in
-                print("RUN CREATED!: \(response.result)")
-                self._runId = response.value?.id
-            }
-        
         // Create local run.
         let run = Run()
         currentRun = run
@@ -75,21 +71,18 @@ class RunManager: NSObject {
     func startRun() {
         
         // Abort if a run hasn't been created.
-        guard let currentRun = currentRun,
-              let runId = _runId
-        else { return }
+        guard let currentRun = currentRun else { return }
         
         // Set run start time and state.
         let start = Date()
         currentRun.start = start
         currentRun.state = .started
         
-        // Make API call to start run.
-        RunTasticAPI.startRun(with: runId,
-                              startTime: start.millisecondsSinceEpoch)
-            .start() { (response: HTTPEmptyResponse) in
-                print("RUN STARTED!: \(response.result)")
-            }
+        // Start the remote run.
+        startRemoteRun(at: start)
+        
+        // Announce that the run has started.
+        self._coach.speak("Run started.")
         
         // Start the location manager.
         _locationManager.startUpdatingLocation()
@@ -111,22 +104,18 @@ class RunManager: NSObject {
     
     func finishRun() {
         
-        guard let currentRun = currentRun,
-              let runId = _runId
-        else { return }
+        guard let currentRun = currentRun else { return }
         
         // Set run finish time and state.
         let finish = Date()
         currentRun.finish = finish
         currentRun.state = .finished
         
-        // Make API call to start run.
-        RunTasticAPI.finishRun(with: runId,
-                               finishTime: finish.millisecondsSinceEpoch,
-                               locations: _routeLocationUpdate)
-            .start() { (response: HTTPEmptyResponse) in
-                print("RUN STARTED!: \(response.result)")
-            }
+        // Finish the remote run.
+        finishRemoteRun(at: finish)
+        
+        // Announce that the run has finished.
+        self._coach.speak("Run finished.")
         
         // Stop the timer.
         _timer?.invalidate()
@@ -145,6 +134,50 @@ class RunManager: NSObject {
         }
         
         return distance
+    }
+    
+    func createRemoteRun() {
+        
+        // Abort if a local run hasn't been created.
+        guard currentRun != nil else { return }
+        
+        // Make API call to create run.
+        RunTasticAPI.createRun()
+            .start() { (response: HTTPResponse<CreateRunDTO>) in
+                print("RUN CREATED!: \(response.result)")
+                self._runId = response.value?.id
+            }
+    }
+    
+    func startRemoteRun(at startTime: Date) {
+        
+        // Abort if a run hasn't been created.
+        guard let runId = _runId,
+              currentRun?.state == .created
+        else { return }
+        
+        // Make API call to start run.
+        RunTasticAPI.startRun(with: runId,
+                              startTime: startTime.millisecondsSinceEpoch)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN STARTED!: \(response.result)")
+            }
+    }
+    
+    func finishRemoteRun(at finishTime: Date) {
+        
+        // Abort if there is no run in progress.
+        guard let runId = _runId,
+              currentRun?.state == .started
+        else { return }
+        
+        // Make API call to finish run.
+        RunTasticAPI.finishRun(with: runId,
+                               finishTime: finishTime.millisecondsSinceEpoch,
+                               locations: _routeLocationUpdate)
+            .start() { (response: HTTPEmptyResponse) in
+                print("RUN FINISHED!: \(response.result)")
+            }
     }
     
     func updateRemoteRun(with locations: [CLLocation]) {
