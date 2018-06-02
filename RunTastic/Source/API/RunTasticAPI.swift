@@ -24,7 +24,7 @@ class RunTasticAPI {
                                         "Content-Type": "application/json",
                                         "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
-                              data: CreateRun.Request(pace: pace))
+                              data: CreateRunDTO.Request(pace: pace))
     }
     
     static func getRuns() -> HTTPRequest {
@@ -77,7 +77,7 @@ class RunTasticAPI {
     }
 }
 
-struct CreateRun {
+struct CreateRunDTO {
     struct Request: Encodable {
         let pace: Int?
     }
@@ -86,8 +86,10 @@ struct CreateRun {
     }
 }
 
-struct CreateRunDTO: Codable {
-    let id: Int
+struct UpdateRunDTO {
+    struct Response: Decodable {
+        let message: String
+    }
 }
 
 struct StartRunDTO: Codable {

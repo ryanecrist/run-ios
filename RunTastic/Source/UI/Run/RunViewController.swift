@@ -124,7 +124,7 @@ class RunViewController: UIViewController {
         } else {
             
             // Start run.
-            runManager.startRun()
+            runManager.startRun(with: runSettings)
             
             // Update action button.
             sender.backgroundColor = .finish

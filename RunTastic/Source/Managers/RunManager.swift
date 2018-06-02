@@ -140,7 +140,7 @@ class RunManager: NSObject {
         
         // Make API call to create run.
         RunTasticAPI.createRun(with: currentRun.settings.targetPaceMillis)
-            .start() { (response: HTTPResponse<CreateRun.Response>) in
+            .start() { (response: HTTPResponse<CreateRunDTO.Response>) in
             
                 // Save run ID for future API calls.
                 self._runId = response.value?.id
@@ -188,8 +188,14 @@ class RunManager: NSObject {
         // Only update the route on the backend periodically.
         if currentTime.timeIntervalSince(_previousRouteUpdateTime) >= 10 {
             RunTasticAPI.updateRun(with: runId, locations: _routeLocationUpdate)
-                .start() { (response: HTTPEmptyResponse) in
+                .start() { (response: HTTPResponse<UpdateRunDTO.Response>) in
+                    
                     print("RUN UPDATED!: \(response.result)")
+                    
+                    // Speak the coaching advice, if any.
+                    if let message = response.value?.message {
+                        self._coach.speak(message)
+                    }
                 }
             _routeLocationUpdate.removeAll()
             _previousRouteUpdateTime = currentTime
