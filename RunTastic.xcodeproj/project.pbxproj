@@ -41,6 +41,7 @@
 		94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* RunViewController.swift */; };
 		94A9D84220AB880E00D175C8 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D84020AB880E00D175C8 /* RunView.swift */; };
 		94BC9C3520C32C76003E7F65 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC9C3420C32C76003E7F65 /* Coach.swift */; };
+		94BC9C3720C33494003E7F65 /* RunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC9C3620C33494003E7F65 /* RunSettings.swift */; };
 		94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4D20B1A743000A2E24 /* RunManager.swift */; };
 		94F81C5020B1AADB000A2E24 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4F20B1AADB000A2E24 /* Run.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		94A9D83F20AB880E00D175C8 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		94A9D84020AB880E00D175C8 /* RunView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
 		94BC9C3420C32C76003E7F65 /* Coach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
+		94BC9C3620C33494003E7F65 /* RunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettings.swift; sourceTree = "<group>"; };
 		94F81C4D20B1A743000A2E24 /* RunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunManager.swift; sourceTree = "<group>"; };
 		94F81C4F20B1AADB000A2E24 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +234,7 @@
 			children = (
 				94A9D83020A78DB600D175C8 /* Location.swift */,
 				94F81C4F20B1AADB000A2E24 /* Run.swift */,
+				94BC9C3620C33494003E7F65 /* RunSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,9 +275,9 @@
 		94F81C4C20B1A6EF000A2E24 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				94BC9C3420C32C76003E7F65 /* Coach.swift */,
 				94A29A4220BC4831005203CD /* MapManager.swift */,
 				94F81C4D20B1A743000A2E24 /* RunManager.swift */,
-				94BC9C3420C32C76003E7F65 /* Coach.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
 				94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */,
 				94A9D81020A70CE200D175C8 /* HTTPRespnoseDecoders.swift in Sources */,
+				94BC9C3720C33494003E7F65 /* RunSettings.swift in Sources */,
 				94A29A4B20BC8712005203CD /* PacePickerView.swift in Sources */,
 				94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */,
 				94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */,

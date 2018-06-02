@@ -58,28 +58,21 @@ class RunManager: NSObject {
         currentRun = nil
         _runId = nil
     }
-    
+
     @discardableResult
-    func createRun() -> Run {
+    func startRun(with settings: RunSettings = RunSettings()) -> Run {
         
         // Create local run.
-        let run = Run()
+        let run = Run(with: settings)
         currentRun = run
-        return run
-    }
-    
-    func startRun() {
-        
-        // Abort if a run hasn't been created.
-        guard let currentRun = currentRun else { return }
         
         // Set run start time and state.
         let start = Date()
-        currentRun.start = start
-        currentRun.state = .started
+        run.start = start
+        run.state = .started
         
         // Start the remote run.
-        startRemoteRun(at: start)
+        startRemoteRun()
         
         // Announce that the run has started.
         self._coach.speak("Run started.")
@@ -92,14 +85,16 @@ class RunManager: NSObject {
                                      repeats: true) { (_) in
 
             // TODO need to prevent start date mutation after being set
-            guard let start = currentRun.start else { return }
+            guard let start = run.start else { return }
                                         
             // Update the run duration.
-            currentRun.duration = Date().timeIntervalSince(start)
+            run.duration = Date().timeIntervalSince(start)
                                         
             // Notify the delegate of the changes.
-            self.delegate?.runManager(self, didUpdateMetricsForRun: currentRun)
+            self.delegate?.runManager(self, didUpdateMetricsForRun: run)
         }
+        
+        return run
     }
     
     func finishRun() {
@@ -112,7 +107,7 @@ class RunManager: NSObject {
         currentRun.state = .finished
         
         // Finish the remote run.
-        finishRemoteRun(at: finish)
+        finishRemoteRun()
         
         // Announce that the run has finished.
         self._coach.speak("Run finished.")
@@ -136,39 +131,37 @@ class RunManager: NSObject {
         return distance
     }
     
-    func createRemoteRun() {
+    func startRemoteRun() {
         
-        // Abort if a local run hasn't been created.
-        guard currentRun != nil else { return }
-        
-        // Make API call to create run.
-        RunTasticAPI.createRun()
-            .start() { (response: HTTPResponse<CreateRunDTO>) in
-                print("RUN CREATED!: \(response.result)")
-                self._runId = response.value?.id
-            }
-    }
-    
-    func startRemoteRun(at startTime: Date) {
-        
-        // Abort if a run hasn't been created.
-        guard let runId = _runId,
-              currentRun?.state == .created
+        // Abort if a run hasn't been created or started.
+        guard let currentRun = currentRun,
+              let startTime = currentRun.start
         else { return }
         
-        // Make API call to start run.
-        RunTasticAPI.startRun(with: runId,
-                              startTime: startTime.millisecondsSinceEpoch)
-            .start() { (response: HTTPEmptyResponse) in
-                print("RUN STARTED!: \(response.result)")
+        // Make API call to create run.
+        RunTasticAPI.createRun(with: currentRun.settings.targetPaceMillis)
+            .start() { (response: HTTPResponse<CreateRun.Response>) in
+            
+                // Save run ID for future API calls.
+                self._runId = response.value?.id
+                
+                // Make API call to start run.
+                if let runId = self._runId {
+                    RunTasticAPI.startRun(with: runId,
+                                          startTime: startTime.millisecondsSinceEpoch)
+                        .start() { (response: HTTPResponse<Data>) in
+                            print("RUN STARTED!: \(response.result)")
+                        }
+                }
             }
     }
     
-    func finishRemoteRun(at finishTime: Date) {
+    func finishRemoteRun() {
         
         // Abort if there is no run in progress.
         guard let runId = _runId,
-              currentRun?.state == .started
+              let currentRun = currentRun,
+              let finishTime = currentRun.finish
         else { return }
         
         // Make API call to finish run.

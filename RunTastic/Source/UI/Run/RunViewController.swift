@@ -23,6 +23,8 @@ class RunViewController: UIViewController {
     
     let runManager = RunManager()
     
+    let runSettings = RunSettings()
+    
     lazy var runView = RunView()
     
     // MARK: - Initializers
@@ -51,8 +53,7 @@ class RunViewController: UIViewController {
         runManager.delegate = self
         
         // Setup run view.
-        runView.actionButton.setTitle("NEW RUN", for: .normal)
-        runView.headerView.targetPaceTextView.text = Formatter.pace(UserDefaults.standard.targetPace)
+        runView.actionButton.setTitle("START", for: .normal)
         runView.mapView.showsUserLocation = true
         
         // Add action listener.
@@ -76,15 +77,6 @@ class RunViewController: UIViewController {
         if let currentRun = runManager.currentRun {
             
             switch currentRun.state {
-            case .created:
-                
-                // Start run.
-                runManager.startRun()
-                
-                // Update action button.
-                sender.backgroundColor = .finish
-                sender.setTitle("FINISH", for: .normal)
-                
             case .started:
                 
                 // Finish run.
@@ -106,6 +98,13 @@ class RunViewController: UIViewController {
                 // Reset the run manager.
                 runManager.reset()
                 
+                // Reset and show header.
+                runView.headerView.durationLabel.text = "00:00:00.00"
+                runView.headerView.distanceLabel.text = "0.00 mi"
+                runView.headerView.paceLabel.text = "0:00 / mi"
+                runView.headerView.targetPaceTextView.text = "0:00 / mi"
+                runView.headerView.setCollapsed(false, animated: true)
+                
                 // Clear the map.
                 runView.mapView.removeOverlays(runView.mapView.overlays)
                 runView.mapView.removeAnnotations(runView.mapView.annotations)
@@ -116,10 +115,7 @@ class RunViewController: UIViewController {
                 
                 // Update action button.
                 sender.backgroundColor = .secondary
-                sender.setTitle("NEW RUN", for: .normal)
-                
-                // Hide header.
-                runView.headerView.setCollapsed(true, animated: true)
+                sender.setTitle("START", for: .normal)
                 
                 // Hide the tab bar.
                 tabBarController?.setTabBarHidden(false, animated: true)
@@ -127,18 +123,12 @@ class RunViewController: UIViewController {
             
         } else {
             
-            // Create a new run.
-            runManager.createRun()
+            // Start run.
+            runManager.startRun()
             
             // Update action button.
-            sender.backgroundColor = .start
-            sender.setTitle("START", for: .normal)
-            
-            // Reset and show header.
-            runView.headerView.durationLabel.text = "00:00:00.00"
-            runView.headerView.distanceLabel.text = "0.00 mi"
-            runView.headerView.paceLabel.text = "0:00 / mi"
-            runView.headerView.setCollapsed(false, animated: true)
+            sender.backgroundColor = .finish
+            sender.setTitle("FINISH", for: .normal)
             
             // Hide the tab bar.
             tabBarController?.setTabBarHidden(true, animated: true)
@@ -147,6 +137,9 @@ class RunViewController: UIViewController {
     
     @objc
     func targetPaceButtonPressed(_ sender: UIButton) {
+        
+        // Setup run settings.
+        runSettings.targetPace = UserDefaults.standard.targetPace
         
         // Setup pace picker accessory view.
         let pacePickerAccessoryView = PacePickerAccessoryView()
@@ -162,14 +155,13 @@ class RunViewController: UIViewController {
     @objc
     func doneButtonPressed(_ sender: UIBarButtonItem) {
         
-        // Abort if there is no current run.
-        guard let currentRun = runManager.currentRun else { return }
-        
         // Update run target pace.
-        currentRun.targetPace = pacePickerView.selectedPace
+        runSettings.targetPace = pacePickerView.selectedPace
         
         // Update header view with target pace.
-        runView.headerView.targetPaceTextView.text = Formatter.pace(currentRun.targetPace)
+        if let targetPace = runSettings.targetPace {
+            runView.headerView.targetPaceTextView.text = Formatter.pace(targetPace)
+        }
         
         // Hide pace picker view.
         runView.headerView.targetPaceTextView.resignFirstResponder()
@@ -186,7 +178,9 @@ extension RunViewController: RunManagerDelegate {
         runView.headerView.paceLabel.text = Formatter.pace(run.pace)
         
         // Style pace label.
-        runView.headerView.paceLabel.textColor = run.pace <= run.targetPace ? .start : .finish
+        if let targetPace = run.settings.targetPace {
+            runView.headerView.paceLabel.textColor = run.pace <= targetPace ? .start : .finish
+        }
     }
 }
 

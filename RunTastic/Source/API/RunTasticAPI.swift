@@ -17,11 +17,14 @@ class RunTasticAPI {
         return HTTPClient.configure(name: "RunTastic", with: configuration)
     }()
     
-    static func createRun() -> HTTPRequest {
+    static func createRun(with pace: Int? = nil) -> HTTPRequest {
         return client.request(method: .post,
                               path: "runs/create",
                               headers: ["Authorization": "Bearer token",
-                                        "ID": "Email someone@example.com"])
+                                        "Content-Type": "application/json",
+                                        "ID": "Email someone@example.com"],
+                              with: HTTPRequestEncoders.json,
+                              data: CreateRun.Request(pace: pace))
     }
     
     static func getRuns() -> HTTPRequest {
@@ -71,6 +74,15 @@ class RunTasticAPI {
                                         "ID": "Email someone@example.com"],
                               with: HTTPRequestEncoders.json,
                               data: locations.map({ LocationDTO($0) }))
+    }
+}
+
+struct CreateRun {
+    struct Request: Encodable {
+        let pace: Int?
+    }
+    struct Response: Decodable {
+        let id: Int
     }
 }
 

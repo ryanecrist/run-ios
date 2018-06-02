@@ -65,9 +65,7 @@ class RunHeaderView: UIView {
         durationLabel.textColor = .white
         
         // Setup distance label.
-        distanceLabel.alpha = 0
         distanceLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 24, weight: .medium)
-        distanceLabel.isHidden = true
         distanceLabel.text = "0.00 mi"
         distanceLabel.textColor = .white
         
@@ -102,21 +100,18 @@ class RunHeaderView: UIView {
         // Setup top stack view.
         let topStackView = UIStackView(arrangedSubviews: [timerImageView, durationLabel, topSpacerView])
         topStackView.alignment = .center
-        topStackView.alpha = 0
-        topStackView.isHidden = true
         topStackView.spacing = 10
         
         // Setup bottom stack view.
         let bottomStackView = UIStackView(arrangedSubviews: [bottomSpacerView, paceLabel, targetPaceTextView, targetPaceButton])
         bottomStackView.alignment = .center
-        bottomStackView.alpha = 0
-        bottomStackView.isHidden = true
         bottomStackView.spacing = 10
         
         // Setup stack view.
         _stackView.alignment = .center
         _stackView.axis = .vertical
         _stackView.distribution = .fill
+        _stackView.isLayoutMarginsRelativeArrangement = true
         _stackView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         _stackView.spacing = 5
         _stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -141,6 +136,7 @@ class RunHeaderView: UIView {
             timerImageView.heightAnchor.constraint(equalTo: timerImageView.widthAnchor),
             
             // Constrain target pace button.
+            targetPaceButton.widthAnchor.constraint(equalToConstant: 24),
             targetPaceButton.heightAnchor.constraint(equalTo: targetPaceButton.widthAnchor),
             
             // Constrain target pace text view.

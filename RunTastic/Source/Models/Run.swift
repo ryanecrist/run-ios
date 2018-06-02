@@ -10,7 +10,6 @@ import CoreLocation
 import Foundation
 
 enum RunState {
-    case created
     case started
     case finished
 }
@@ -21,15 +20,19 @@ class Run {
     
     var finish: Date?
     
-    var state = RunState.created
-    
+    var state = RunState.started
+
     var duration: TimeInterval = 0
     
     var distance: Double = 0
     
     var pace: TimeInterval = 0
     
-    var targetPace = UserDefaults.standard.targetPace
-    
     var route: [CLLocation] = []
+    
+    var settings: RunSettings
+    
+    init(with settings: RunSettings) {
+        self.settings = settings
+    }
 }
