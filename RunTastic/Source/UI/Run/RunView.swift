@@ -87,7 +87,7 @@ class RunView: UIView {
         compassButton.heightAnchor.constraint(equalTo: compassButton.widthAnchor).isActive = true
         
         // Constrain action button.
-        actionButton.bottomAnchor.constraint(equalTo: mapView.bottomAnchor, constant: -8).isActive = true
+        actionButton.bottomAnchor.constraint(equalTo: mapView.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
         actionButton.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
         actionButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
         actionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
