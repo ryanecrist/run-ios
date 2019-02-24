@@ -17,8 +17,6 @@ class RunView: UIView {
     
     let actionButton = UIButton()
     
-    private var headerViewHeightConstraint: NSLayoutConstraint!
-    
     convenience init() {
         self.init(frame: .zero)
     }
@@ -67,10 +65,8 @@ class RunView: UIView {
         mapView.addSubview(actionButton)
         addSubview(stackView)
         
+        // Move the header view on top.
         stackView.bringSubview(toFront: headerView)
-        
-        headerViewHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 20)
-        headerViewHeightConstraint.priority = .defaultHigh
         
         // Constrain stack view.
         NSLayoutConstraint.activate([
@@ -78,7 +74,6 @@ class RunView: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.rightAnchor.constraint(equalTo: rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-//            headerViewHeightConstraint,
         ])
         
         // Constrain user tracking button.
@@ -100,13 +95,5 @@ class RunView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         return nil
-    }
-    
-    var isHeaderViewHidden: Bool {
-        return headerViewHeightConstraint.isActive
-    }
-    
-    func setHeaderViewHidden(_ hidden: Bool, animated: Bool) {
-//        headerViewHeightConstraint.isActive = hidden
     }
 }

@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().isTranslucent = false
         
+        // Register defaults.
+        UserDefaults.standard.registerDefaults()
+        
         // Setup location manager.
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.requestAlwaysAuthorization()

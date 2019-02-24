@@ -22,6 +22,10 @@
 		94A29A3F20BC397F005203CD /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A3E20BC397F005203CD /* Formatter.swift */; };
 		94A29A4320BC4831005203CD /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4220BC4831005203CD /* MapManager.swift */; };
 		94A29A4920BC5219005203CD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4420BC50FF005203CD /* SettingsView.swift */; };
+		94A29A4B20BC8712005203CD /* PacePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4A20BC8712005203CD /* PacePickerView.swift */; };
+		94A29A4D20BC8893005203CD /* PacePickerAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */; };
+		94A29A4F20BC899F005203CD /* UIBarButtonItem+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */; };
+		94A29A5320BCA4BB005203CD /* UserDefaults+RunTastic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A29A5220BCA4BB005203CD /* UserDefaults+RunTastic.swift */; };
 		94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */; };
 		94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80720A70CE100D175C8 /* HTTPClient.swift */; };
 		94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D80820A70CE200D175C8 /* HTTPResult.swift */; };
@@ -36,6 +40,8 @@
 		94A9D83120A78DB600D175C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83020A78DB600D175C8 /* Location.swift */; };
 		94A9D84120AB880E00D175C8 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D83F20AB880E00D175C8 /* RunViewController.swift */; };
 		94A9D84220AB880E00D175C8 /* RunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A9D84020AB880E00D175C8 /* RunView.swift */; };
+		94BC9C3520C32C76003E7F65 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC9C3420C32C76003E7F65 /* Coach.swift */; };
+		94BC9C3720C33494003E7F65 /* RunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC9C3620C33494003E7F65 /* RunSettings.swift */; };
 		94F81C4E20B1A743000A2E24 /* RunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4D20B1A743000A2E24 /* RunManager.swift */; };
 		94F81C5020B1AADB000A2E24 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F81C4F20B1AADB000A2E24 /* Run.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +65,10 @@
 		94A29A3E20BC397F005203CD /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		94A29A4220BC4831005203CD /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		94A29A4420BC50FF005203CD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		94A29A4A20BC8712005203CD /* PacePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacePickerView.swift; sourceTree = "<group>"; };
+		94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacePickerAccessoryView.swift; sourceTree = "<group>"; };
+		94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+RunTastic.swift"; sourceTree = "<group>"; };
+		94A29A5220BCA4BB005203CD /* UserDefaults+RunTastic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+RunTastic.swift"; sourceTree = "<group>"; };
 		94A9D80620A70CE100D175C8 /* HTTPRequestEncoders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestEncoders.swift; sourceTree = "<group>"; };
 		94A9D80720A70CE100D175C8 /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		94A9D80820A70CE200D175C8 /* HTTPResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResult.swift; sourceTree = "<group>"; };
@@ -73,6 +83,8 @@
 		94A9D83020A78DB600D175C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		94A9D83F20AB880E00D175C8 /* RunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		94A9D84020AB880E00D175C8 /* RunView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunView.swift; sourceTree = "<group>"; };
+		94BC9C3420C32C76003E7F65 /* Coach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
+		94BC9C3620C33494003E7F65 /* RunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettings.swift; sourceTree = "<group>"; };
 		94F81C4D20B1A743000A2E24 /* RunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunManager.swift; sourceTree = "<group>"; };
 		94F81C4F20B1AADB000A2E24 /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,8 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				94A9D83E20AB87D900D175C8 /* Run */,
-				9472362520BA312C007E1D31 /* Settings */,
 				9472362220BA307E007E1D31 /* Training */,
+				9472362520BA312C007E1D31 /* Settings */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -222,6 +234,7 @@
 			children = (
 				94A9D83020A78DB600D175C8 /* Location.swift */,
 				94F81C4F20B1AADB000A2E24 /* Run.swift */,
+				94BC9C3620C33494003E7F65 /* RunSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,9 +251,11 @@
 			isa = PBXGroup;
 			children = (
 				94A9D82E20A74F2600D175C8 /* Date+RunTastic.swift */,
+				94A29A4E20BC899F005203CD /* UIBarButtonItem+RunTastic.swift */,
 				948E823A20B06D53003E7DEF /* UIColor+RunTastic.swift */,
 				948E823C20B0749E003E7DEF /* UITabBarController+RunTastic.swift */,
 				9472362A20BA3341007E1D31 /* UIView+RunTastic.swift */,
+				94A29A5220BCA4BB005203CD /* UserDefaults+RunTastic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -248,6 +263,8 @@
 		94A9D83E20AB87D900D175C8 /* Run */ = {
 			isa = PBXGroup;
 			children = (
+				94A29A4C20BC8893005203CD /* PacePickerAccessoryView.swift */,
+				94A29A4A20BC8712005203CD /* PacePickerView.swift */,
 				948E823E20B0A942003E7DEF /* RunHeaderView.swift */,
 				94A9D84020AB880E00D175C8 /* RunView.swift */,
 				94A9D83F20AB880E00D175C8 /* RunViewController.swift */,
@@ -258,6 +275,7 @@
 		94F81C4C20B1A6EF000A2E24 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				94BC9C3420C32C76003E7F65 /* Coach.swift */,
 				94A29A4220BC4831005203CD /* MapManager.swift */,
 				94F81C4D20B1A743000A2E24 /* RunManager.swift */,
 			);
@@ -291,7 +309,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Shrubtactic;
 				TargetAttributes = {
 					94175FF120A5232500A572D6 = {
@@ -339,15 +357,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94A29A4F20BC899F005203CD /* UIBarButtonItem+RunTastic.swift in Sources */,
 				9472362920BA3212007E1D31 /* RunTableViewCell.swift in Sources */,
 				94F81C5020B1AADB000A2E24 /* Run.swift in Sources */,
+				94A29A4D20BC8893005203CD /* PacePickerAccessoryView.swift in Sources */,
 				94A9D80D20A70CE200D175C8 /* HTTPRequestEncoders.swift in Sources */,
 				94A9D80F20A70CE200D175C8 /* HTTPResult.swift in Sources */,
 				94A9D81020A70CE200D175C8 /* HTTPRespnoseDecoders.swift in Sources */,
+				94BC9C3720C33494003E7F65 /* RunSettings.swift in Sources */,
+				94A29A4B20BC8712005203CD /* PacePickerView.swift in Sources */,
 				94A9D81120A70CE200D175C8 /* HTTPRequest.swift in Sources */,
 				94A9D80E20A70CE200D175C8 /* HTTPClient.swift in Sources */,
 				94A9D82520A7191400D175C8 /* RunTasticAPI.swift in Sources */,
 				94A9D84220AB880E00D175C8 /* RunView.swift in Sources */,
+				94BC9C3520C32C76003E7F65 /* Coach.swift in Sources */,
 				94A9D81320A70CE200D175C8 /* HTTPResponse.swift in Sources */,
 				9472362420BA308E007E1D31 /* TrainingViewController.swift in Sources */,
 				94A29A3F20BC397F005203CD /* Formatter.swift in Sources */,
@@ -356,6 +379,7 @@
 				94175FF620A5232500A572D6 /* AppDelegate.swift in Sources */,
 				9472362B20BA3341007E1D31 /* UIView+RunTastic.swift in Sources */,
 				948E823F20B0A942003E7DEF /* RunHeaderView.swift in Sources */,
+				94A29A5320BCA4BB005203CD /* UserDefaults+RunTastic.swift in Sources */,
 				948E823B20B06D53003E7DEF /* UIColor+RunTastic.swift in Sources */,
 				94A29A4920BC5219005203CD /* SettingsView.swift in Sources */,
 				948E823520AE666A003E7DEF /* Configuration.swift in Sources */,
@@ -482,6 +506,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -492,6 +517,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
